@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "gitinit", "\\Baloo\home\pohara\Documents\gitinit", "{2BB09F03-E9E3-4E43-8396-BF435D2146F3}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/gitinit"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\..\gitinit\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\gitinit\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/gitinit"
+		Release.AspNetCompiler.PhysicalPath = "..\..\..\gitinit\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\gitinit\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "1828"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2BB09F03-E9E3-4E43-8396-BF435D2146F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BB09F03-E9E3-4E43-8396-BF435D2146F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
