@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <h1>Git`in It</h1>
+        <h2>Understanding Distributed Version Control with Git.</h2>
+
+        <h3>Getting Started</h3>
+
+        <code>Git init</code>
+
+        <p>To start working with our DVCS, the tool is going to need a place to do it's work.  This is both the scratch pad the tool uses and the location of the version information for the changes we are tracking.  Git creates this space when you run the <code>get init</code> command.  Git will create a folder called <code>.git</code>.  There is nothing in this folder you need to look at.  It is importand that this folder is being backed up somehow as all of the change history that is being tracked is in this folder.</p>
+        <p>So now that we have run <code>get init</code> we have a repository but there are no files in it.  Not very interesting.</p>
+
+        <code>Git add</code>
+
+        <p>Not surprisingly the command to add files in git is <code>git add</code>.  This adds the files to a staging area.  Since Git was designed around a command line interface (CLI) there needed to be a way to select the files you want to act on.  This staging area is that list.  People will often use <code>get add .</code> or <code>git add -A</code>.  The first command <code>git add .</code> will add files that are new or that have been modified to the staging area.  <code>Git add -A</code> will add new files, modified files and note any files that have been removed.</p>
+        <p>Now that our list of files has been staged we can "look" at the list using the <code>git status</code> command.</p>
+
+        <code>
+            # On branch master
+            # Changes to be committed:
+            #   (use "git reset HEAD &lt;file&gt;..." to unstage)
+            #
+            #       new file:   GettingStarted.html
+            #
+            # Untracked files:
+            #   (use "git add &lt;file&gt; to include in what will be committed)
+            #
+            #       FixingMistakes.html
+            #       SharingWithOthers.html
+        </code>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X');ga('send','pageview');
+        </script>
+    </body>
+</html>
