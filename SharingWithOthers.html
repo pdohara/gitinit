@@ -27,19 +27,23 @@
 
         <h3>Sharing with the Team</h3>
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
+        <p>Before you can share with others, you need to decide where and how you will be sharing code.  Everything that has been done up to this point in the tutorial has happened on a single machine.  This is a point that sometimes gets missed by people who have used revision control software in the passed.  The commits that we have been doing have not been copying our changes to a server.  The good part of this is that commits are very fast and we can do them when we do not have access to the "server".  The other side of it is that a commit does not save the information to another machine.  This means that after a commit others we are working on still connot "see" our changes.</p>
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='//www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X');ga('send','pageview');
-        </script>
+        <h3>Git Server Options</h3>
+
+        <p>To start I would recomend using a service like <a href="https://github.com/">GitHub</a>.  This frees you from having to learn about deployment options and server setup.  Alternately you may have a Git server that has already been setup by your employer or someone else on your team.  Obviously in this case you will use that server.  If you are determined to setup your own server, I recomend getting a package like GitHub offers that will handle the complete installation for you.</p>
+
+        <h3>Working with remotes</h3>
+
+        <p>As we have already discussed the repository is actually on your local computer.  In order to work with others the repository needs to be someplace that everyone can get access.  I will not walk through getting a local repository into a server repository (thought this is possible), instead let us assume that you have put the repository onto a server.  This becomes one of the remotes for your local repository.</p>
+
+        <code>Git clone [URL] [folder]</code>
+
+        <p>For example</p>
+
+        <code>Git clone ssh://git@vm-git/GitinitWebSite.git C:\Source\GitinitWebSite</code>
+
+        <p>We talked about creating a local repository by running the <code>git init</code> command.  When you are working with a remote server you will more typically create the repository on the server (however it makes sense for your server) and then clone the repository.  This will also setup the remote relationship automatically.</p>
+
     </body>
 </html>
