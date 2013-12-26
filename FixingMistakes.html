@@ -27,10 +27,88 @@
 
         <h3>Fixing Mistakes</h3>
 
-        <p>Part of the reason for tracking versions is because things do not always go as planned.  Let's assume that are looking over your work (not making any changes yet) and then you notice that Git says there are changes to the file.  So you look at the diff and discover your editor has changed all the tabs to spaces.  This wasn ot a change you intended to make.  You can change the setting in the editor, but how do we get the file back the way it was?</p>
+        <p>Part of the reason for tracking versions is because things do not always go as planned.  Being able to go back to a previous version of a file is fundamental to using any Software Configuration Management (SCM) Tool.  Let's take a look at some scenarios with Git and getting back to where you were before.</p>
+       
+        <h3>Starting Over</h3>
 
+        <p>Perhaps the most common error people make when working with an SCM tool is the forgotten file.  You have been working on a change to a web page.  After a couple of attempts to get the font characteristics on a title to do what you want you find that HTML and CSS are just not up to the task so you decide to create a graphic for the title.  Photoshop renders the font just as you want, the title looks good and you go back to working on the rest of the page.  Now that you have things just right you decide to check in your changes.  Now you pull the website files to your test deployment environment and get the dreaded red X for the image.  You forgot to add the file.  Git allows you to correct this by amending that last commit.</p>
 
+        <code>Git commit --amend</code>
 
+        <p>This command commits what every you have staged as part of the last commit to the repository.  In this way you can add that missed file, or forgotten copyright update, or what ever occurs to you just after you commit your changes.</p>
+
+        <p>Sometimes we want our SCM tool to get us out of trouble.  It can be wonderful to just get back to a know good point.  Let's assume that are looking over your work (not making any changes yet) and then you notice that Git says there are changes to the files.  So you look at the diff and discover your editor has changed all the tabs to spaces.  This wasn't a change you intended to make.  You can change the setting in the editor, but how do we get the file back the way it was?  Let's start by making sure we know what has changed.</p>
+
+        <code>Git status</code>
+
+        <p>If you remember the output will look something like this:</p>
+
+        <code>
+            # On branch master<br />
+            # Changes to be committed:<br />
+            #   (use "git reset HEAD &lt;file&gt;..." to unstage)<br />
+            #<br />
+            #       new file:   GettingStarted.html<br />
+            #       modified:   index.html<br />
+            #<br />
+            # Untracked files:<br />
+            #   (use "git add &lt;file&gt; to include in what will be committed)<br />
+            #<br />
+            #       FixingMistakes.html<br />
+            #       SharingWithOthers.html<br />
+        </code>
+
+        <p>To go back to a clean slate (no changes) we can use the checkout command:</p>
+
+        <code>Git checkout [filename]</code>
+
+        <p>This will replace the file with the latest version of the file from the repository.  This works fine for one or two files, but if you have many changes that need to be undone, then the reset command is more appropriate.</p>
+
+        <code>Git reset --hard</code>
+
+        <p>This command will reset the working files and the index (stage area).  Using <code>--mixed</code> will reset the index but not change the working files.  This is the default behavior.</p>
+
+        <p>Sometimes we make changes and commit them and then decide that this was a bad idea and we wish to go back to a previous state.  You can checkout a previous commit.  First you need to identify what state you wish to get back to.  The log command will show you a list of your previous commits.</p>
+
+        <code>Git log</code>
+
+        <code>
+          commit 390b0692d6587b03f83d0355ec4eff0529d31bc7
+          Author: Patrick O'Hara <patrick.ohara@cognex.com>
+          Date:   Tue Dec 24 11:59:36 2013 -0600
+
+              Starting to work on FixingMistakes.html
+
+          commit 4952548d775dc7c8fd066764465abaec0da70394
+          Author: Patrick O'Hara <patrick.ohara@cognex.com>
+          Date:   Tue Dec 24 11:25:23 2013 -0600
+
+              Completed GettingStarted.html
+
+          commit ca93a4cecd5bd185d12ea96856d3bb60b3a28104
+          Author: Patrick O'Hara <patrick.ohara@cognex.com>
+          Date:   Tue Dec 24 11:00:12 2013 -0600
+
+              Started working on Getting Started page
+
+          commit ca82493642326df3f7461dfa87a34959f2327810
+          Author: Patrick O'Hara <patrick.ohara@cognex.com>
+          Date:   Tue Dec 24 10:24:53 2013 -0600
+
+              Wrote overview.
+
+          commit 9227e1863089295a81c87ed3e631b1efe2a4c93a
+          Author: Patrick O'Hara <patrick.ohara@cognex.com>
+          Date:   Tue Dec 24 09:20:46 2013 -0600
+
+              Template commit
+                  
+        </code>
+
+        <p>The commit identifiers are a little scary at first.  The good news is that you do not have to type the whole SHA1 ID, just enough to make it unique.  So if we wanted to get back to the Completed GettingStarted.html commit we can run the command:</p>
+
+        <code>Git checkout 
+        
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
