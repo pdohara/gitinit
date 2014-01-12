@@ -1,11 +1,7 @@
-Git`in It
-=========
-
-Understanding Distributed Version Control with Git
---------------------------------------------------
-
-##Getting Started
-
+---
+title: Getting Started
+template: article.jade
+----
 ###Getting to Know Git
 
   Before we get started we need to introduce ourselves to Git.  This is important because beyond tracking what has changed, Git is also going to track who made the changes.

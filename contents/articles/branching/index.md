@@ -1,8 +1,7 @@
-Git`in It
-=========
-
-Understanding Distributed Version Control with Git
---------------------------------------------------
+---
+title: Branching
+template: article.jade
+----
 
 ##Branching
 

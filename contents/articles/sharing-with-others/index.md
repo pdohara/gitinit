@@ -1,10 +1,7 @@
-Git`in It
-=========
-
-Understanding Distributed Version Control with Git
---------------------------------------------------
-
-##Sharing With the Team
+---
+title: Sharing With the Team
+template: article.jade
+----
 
   Before you can share with others, you need to decide where you will be sharing.  Everything that has been done up to this point in the tutorial has happened on a single machine.  The commits that we have been doing have been recorded to the repository on the local machine.  The good part of this is that commits are very fast and we can do them when we do not have access to a "server".  The other side of it is that a commit does not save the information to another machine.  To share with others we need a "server" to push our code to so everyone can have access.
 

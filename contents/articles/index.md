@@ -1,8 +1,9 @@
-Git`in It
-=========
-
-Understanding Distributed Version Control with Git
---------------------------------------------------
+---
+title: My first post
+date: 2012-12-12 12:12
+author: John Hjort <foo@bar.com>
+template: article.jade
+----
 
 ##Overview
 
