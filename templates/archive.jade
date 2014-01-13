@@ -1,0 +1,11 @@
+
+extends layout
+
+block content
+  - var lineHeight = 2.2;
+  section.archive
+    ul
+      each item in env.helpers.getArticles(contents)
+        li(style='height:'+ lineHeight + 'em;line-height:'+ lineHeight + 'em;')
+          a(href=item.url)=item.title
+            

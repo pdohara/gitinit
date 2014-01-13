@@ -1,10 +1,3 @@
----
-title: My first post
-date: 2012-12-12 12:12
-author: John Hjort <foo@bar.com>
-template: article.jade
-----
-
 ##Overview
 
   This site is was created to help people to understand distributed version control systems (DVCS) and their use.  I am using Git as it has become the de facto standard for DVCS.  DVCS are not only a better form of revision control, but a different approach.  This means that you need to think differently about the changes you are making when using a DVCS than you would with a revision control tool.  So let's start with a little retooling of how you think about history.
