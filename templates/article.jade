@@ -3,6 +3,7 @@ extends layout
 
 block append vars
   - bodyclass = 'article-detail'
+  - var thePage = page
 
 block prepend title
   | #{ page.title + " - "}
@@ -16,6 +17,6 @@ block content
 
 block prepend footer
   div.nav
-    a(href=contents.index.url) « Back
+    a(href=env.helpers.makeRelative(relativeTo, '/')) « Back
 
 

@@ -1,11 +1,13 @@
 {
+  "output" : "../build/",
   "locals": {
     "url": "http://localhost:8080",
     "name": "Gitin' It",
     "description": "Understanding Distributed Version Control with Git"
   },
   "plugins": [
-    "./plugins/paginator.coffee"
+    "./plugins/paginator.coffee",
+    "./plugins/relative.coffee"
   ],
   "require": {
     "moment": "moment",
