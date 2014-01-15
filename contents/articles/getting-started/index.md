@@ -64,11 +64,11 @@ template: article.jade
             create mode 100644 GettingStarted.html
         `
 
-  A couple of things to note.  The `[master  ca93a4c]` tells you that the commit was added to the master branch (more on branches later) and the commit has an ID of ca93a4c.  The ID will become important when we start [SharingWithOthers](sharing our code with others).
+  A couple of things to note.  The `[master  ca93a4c]` tells you that the commit was added to the master branch (more on branches later) and the commit has an ID of ca93a4c.  The ID will become important when we start [SharingWithOthers](../sharing-with-others/).
 
         `Git add [filename]`
 
   Although it is common to wish to add everything that has changed, sometimes we want to be a little more selective.  The command `git add GettingStarted.html` will add only the file specified.  Another way to be selective is to use the command `get add -i`.  This command will present a menu that will walk you through adding files and even changes (hunks) within files that you wish to stage.
 
-  Note that you do not have to plan for the files you wish to modify.  You just make changes and Git notices those changes, you stage them and then commit them.  If you are working on your own this is all the workflow that you need.  As with any endeavor you will make mistakes from time to time, so let's talk about [fixing mista<span style="text-decoration: line-through;">t</span>kes](FixingMistakes.html).
+  Note that you do not have to plan for the files you wish to modify.  You just make changes and Git notices those changes, you stage them and then commit them.  If you are working on your own this is all the workflow that you need.  As with any endeavor you will make mistakes from time to time, so let's talk about [fixing mista<span style="text-decoration: line-through;">t</span>kes](../fixing-mistakes/).
 

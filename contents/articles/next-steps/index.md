@@ -13,7 +13,7 @@ http://marklodato.github.io/visual-git-guide/index-en.html
 https://www.atlassian.com/git/tutorial
 
 
-Evaluate
+*TODO Evaluate*
 http://www.sbf5.com/~cduan/technical/git/
 http://gitimmersion.com/
 http://net.tutsplus.com/tutorials/other/easy-version-control-with-git/
