@@ -13,7 +13,7 @@ block header
 
 block content
   article.article
-    section.content!= typogr(page.html).typogrify()
+    section.content!= typogr(page.html.replace(/\/articles\//g,'../')).typogrify()
 
 block prepend footer
   div.nav

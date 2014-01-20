@@ -2,7 +2,7 @@ extends layout
 
 block content
   div
-    !=contents['articles']['index.md'].html
+    !=contents['articles']['index.md'].html.replace(/\/articles\//g,'./')
 
 
 
