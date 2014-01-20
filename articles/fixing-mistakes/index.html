@@ -13,7 +13,7 @@
     <header class="header">
       <div class="content-wrap">
         <ul class="pages">
-          <li><a href="../../articles/common-issues/">Common Issues</a>
+          <li><a href="../../articles/branching/">Branching</a>
             <section class="content"></section>
           </li>
           <li><a href="../../articles/fixing-mistakes/">Fixing Mistakes</a>
@@ -22,7 +22,7 @@
           <li><a href="../../articles/getting-started/">Getting Started</a>
             <section class="content"></section>
           </li>
-          <li><a href="../../articles/branching/">Branching</a>
+          <li><a href="../../articles/next-steps/">Next Steps</a>
             <section class="content"></section>
           </li>
           <li><a href="../../articles/sharing-with-others/">Sharing With the Team</a>
@@ -38,187 +38,176 @@
           <section class="content"><p>  Part of the reason for tracking versions is because things do not always go as planned.  Let’s assume that are looking over your work (not making any changes yet) and then you notice that Git says there are changes to the file.  So you look at the diff and discover your editor has changed all the tabs to spaces.  This wasn ot a change you intended to make.  You can change the setting in the editor, but how do we get the file back the way it&nbsp;was?</p>
 <p>  This command commits what every you have staged as part of the last commit to the repository.  In this way you can add that missed file, or forgotten copyright update, or what ever occurs to you just after you commit your&nbsp;changes.</p>
 <p>  Sometimes we want our <span class="caps">SCM</span> tool to get us out of trouble.  It can be wonderful to just get back to a know good point.  Let’s assume that are looking over your work (not making any changes yet) and then you notice that Git says there are changes to the files.  So you look at the diff and discover your editor has changed all the tabs to spaces.  This wasn’t a change you intended to make.  You can change the setting in the editor, but how do we get the file back the way it was?  Let’s start by making sure we know what has&nbsp;changed.</p>
-<pre><code>    `Git status`</code></pre>
+<pre><code>git status</code></pre>
 <p>  If you remember the output will look something like&nbsp;this:</p>
-<pre><code>    `
-        # On branch master
-        # Changes to be committed:
-        #   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)
-        #
-        #       new file:   GettingStarted.html
-        #       modified:   index.html
-        #
-        # Untracked files:
-        #   (use &quot;git add &lt;file&gt; to include in what will be committed)
-        #
-        #       FixingMistakes.html
-        #       SharingWithOthers.html
-    `</code></pre>
+<pre><code># On branch master
+# Changes to be committed:
+#   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)
+#
+#       new file:   GettingStarted.html
+#       modified:   index.html
+#
+# Untracked files:
+#   (use &quot;git add &lt;file&gt; to include in what will be committed)
+#
+#       FixingMistakes.html
+#       SharingWithOthers.html</code></pre>
 <p>  To go back to a clean slate (no changes) we can use the checkout&nbsp;command:</p>
-<pre><code>    `Git checkout [filename]`</code></pre>
+<pre><code>git checkout [filename]</code></pre>
 <p>  This will replace the file with the latest version of the file from the repository.  This works fine for one or two files, but if you have many changes that need to be undone, then the reset command is more&nbsp;appropriate.</p>
-<pre><code>    `Git reset --hard`</code></pre>
+<pre><code>git reset --hard</code></pre>
 <p>  This command will reset the working files and the index (stage area).  Using <code>--mixed</code> will reset the index but not change the working files.  This is the default&nbsp;behavior.</p>
 <p>  Sometimes we make changes and commit them and then decide that this was a bad idea and we wish to go back to a previous state.  You can checkout a previous commit.  First you need to identify what state you wish to get back to.  The log command will show you a list of your previous&nbsp;commits.</p>
-<pre><code>    `Git log`
+<pre><code>git log
 
-    `
-      commit 390b0692d6587b03f83d0355ec4eff0529d31bc7
-      Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
-      Date:   Tue Dec 24 11:59:36 2013 -0600
+commit 390b0692d6587b03f83d0355ec4eff0529d31bc7
+Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
+Date:   Tue Dec 24 11:59:36 2013 -0600
 
-          Starting to work on FixingMistakes.html
+    Starting to work on FixingMistakes.html
 
-      commit 4952548d775dc7c8fd066764465abaec0da70394
-      Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
-      Date:   Tue Dec 24 11:25:23 2013 -0600
+commit 4952548d775dc7c8fd066764465abaec0da70394
+Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
+Date:   Tue Dec 24 11:25:23 2013 -0600
 
-          Completed GettingStarted.html
+    Completed GettingStarted.html
 
-      commit ca93a4cecd5bd185d12ea96856d3bb60b3a28104
-      Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
-      Date:   Tue Dec 24 11:00:12 2013 -0600
+commit ca93a4cecd5bd185d12ea96856d3bb60b3a28104
+Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
+Date:   Tue Dec 24 11:00:12 2013 -0600
 
-          Started working on Getting Started page
+    Started working on Getting Started page
 
-      commit ca82493642326df3f7461dfa87a34959f2327810
-      Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
-      Date:   Tue Dec 24 10:24:53 2013 -0600
+commit ca82493642326df3f7461dfa87a34959f2327810
+Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
+Date:   Tue Dec 24 10:24:53 2013 -0600
 
-          Wrote overview.
+    Wrote overview.
 
-      commit 9227e1863089295a81c87ed3e631b1efe2a4c93a
-      Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
-      Date:   Tue Dec 24 09:20:46 2013 -0600
+commit 9227e1863089295a81c87ed3e631b1efe2a4c93a
+Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
+Date:   Tue Dec 24 09:20:46 2013 -0600
 
-          Template commit
-
-    `</code></pre>
+    Template commit</code></pre>
 <p>  The commit identifiers are a little scary at first.  The good news is that you do not have to type the whole <span class="caps">SHA1</span> ID, just enough to make it unique.  So if we wanted to get back to the Completed GettingStarted.html commit we can run the&nbsp;command:</p>
-<pre><code>    `Git checkout 4952`</code></pre>
+<pre><code>git checkout 495254</code></pre>
 <p>  Although this changes the state of the working files to the commit specified, it also results in a&nbsp;warning:</p>
-<pre><code>    `
-      Note: checking out &#39;4952&#39;.
+<pre><code>Note: checking out &#39;4952&#39;.
 
-      You are in &#39;detached HEAD&#39; state. You can look around, make experimental
-      changes and commit them, and you can discard any commits you make in this
-      state without impacting any branches by performing another checkout.
+You are in &#39;detached HEAD&#39; state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
 
-      If you want to create a new branch to retain commits you create, you may
-      do so (now or later) by using -b with the checkout command again. Example:
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
 
-        git checkout -b new_branch_name
+  git checkout -b new_branch_name
 
-      HEAD is now at 4952548... Completed GettingStarted.html
-    `</code></pre>
+HEAD is now at 4952548... Completed GettingStarted.html</code></pre>
 <p>  Git is telling you that you are looking at a historical commit.  You cannot work here, unless you create a branch.  This is fine if we just wanted to look at the state of the files for this commit, but since we want to move back to this commit we need to try a different&nbsp;approach.</p>
 <p>  Consider the following&nbsp;history:</p>
-<pre><code>    `
-      commit c0d84f689b751f7d9bec63d0fb86711936966419
-      Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
-      Date:   Thu Dec 26 10:59:30 2013 -0600
+<pre><code>commit c0d84f689b751f7d9bec63d0fb86711936966419
+Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
+Date:   Thu Dec 26 10:59:30 2013 -0600
 
-          Spurious 3
+    Spurious 3
 
-      commit f832c8235ca08696f937ef0f094c00b5e05b84aa
-      Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
-      Date:   Thu Dec 26 10:59:06 2013 -0600
+commit f832c8235ca08696f937ef0f094c00b5e05b84aa
+Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
+Date:   Thu Dec 26 10:59:06 2013 -0600
 
-          Spurious 2
+    Spurious 2
 
-      commit faa8c71ed0fac5f9fc97a03e68c506195eab03e6
-      Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
-      Date:   Thu Dec 26 10:58:44 2013 -0600
+commit faa8c71ed0fac5f9fc97a03e68c506195eab03e6
+Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
+Date:   Thu Dec 26 10:58:44 2013 -0600
 
-          Spurious 1
+    Spurious 1
 
-      commit 181df70bf628b80716d8950101a434e1ebce2b41
-      Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
-      Date:   Thu Dec 26 10:48:23 2013 -0600
+commit 181df70bf628b80716d8950101a434e1ebce2b41
+Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
+Date:   Thu Dec 26 10:48:23 2013 -0600
 
-          Working on fixing page.
+    Working on fixing page.
 
-      commit 390b0692d6587b03f83d0355ec4eff0529d31bc7
-      Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
-      Date:   Tue Dec 24 11:59:36 2013 -0600
+commit 390b0692d6587b03f83d0355ec4eff0529d31bc7
+Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
+Date:   Tue Dec 24 11:59:36 2013 -0600
 
-          Starting to work on FixingMistakes.html
+    Starting to work on FixingMistakes.html
 
-      commit 4952548d775dc7c8fd066764465abaec0da70394
-      Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
-      Date:   Tue Dec 24 11:25:23 2013 -0600
+commit 4952548d775dc7c8fd066764465abaec0da70394
+Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
+Date:   Tue Dec 24 11:25:23 2013 -0600
 
-          Completed GettingStarted.html
+    Completed GettingStarted.html
 
-      commit ca93a4cecd5bd185d12ea96856d3bb60b3a28104
-      Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
-      Date:   Tue Dec 24 11:00:12 2013 -0600
+commit ca93a4cecd5bd185d12ea96856d3bb60b3a28104
+Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
+Date:   Tue Dec 24 11:00:12 2013 -0600
 
-          Started working on Getting Started page
+    Started working on Getting Started page
 
-      commit ca82493642326df3f7461dfa87a34959f2327810
-      Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
-      Date:   Tue Dec 24 10:24:53 2013 -0600
+commit ca82493642326df3f7461dfa87a34959f2327810
+Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
+Date:   Tue Dec 24 10:24:53 2013 -0600
 
-          Wrote overview.
+    Wrote overview.
 
-      commit 9227e1863089295a81c87ed3e631b1efe2a4c93a
-      Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
-      Date:   Tue Dec 24 09:20:46 2013 -0600
+commit 9227e1863089295a81c87ed3e631b1efe2a4c93a
+Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
+Date:   Tue Dec 24 09:20:46 2013 -0600
 
-          Template commit
-    `</code></pre>
+    Template commit</code></pre>
 <p>  Let us assume that those last three commits where a mistake.  So I would like to get back to the state for commit 181df70bf628b80716d8950101a434e1ebce2b41.  The command to get back to that state&nbsp;is:</p>
-<pre><code>    `Git reset 181df70bf628b80716d8950101a434e1ebce2b41`</code></pre>
+<pre><code>git reset 181df70bf628b80716d8950101a434e1ebce2b41</code></pre>
 <p>  Or</p>
-<pre><code>    `Git reset 181d`</code></pre>
+<pre><code>git reset 181df7</code></pre>
 <p>  In this case there is another way to specify a commit that may be more useful.  We want to backup 3 commits, so we can specify the commit relative to our current (<span class="caps">HEAD</span>)&nbsp;position.</p>
-<pre><code>    `Git reset HEAD~3`</code></pre>
+<pre><code>git reset HEAD~3</code></pre>
 <p>  After running this command the history will look like&nbsp;this:</p>
-<pre><code>    `
-      commit 80be37ff9f4edc2c699ec05d7b3c6d4f1cc60bb1
-      Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
-      Date:   Thu Dec 26 11:04:38 2013 -0600
+<pre><code>commit 80be37ff9f4edc2c699ec05d7b3c6d4f1cc60bb1
+Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
+Date:   Thu Dec 26 11:04:38 2013 -0600
 
-          Revert &quot;Working on fixing page.&quot;
+    Revert &quot;Working on fixing page.&quot;
 
-          This reverts commit 181df70bf628b80716d8950101a434e1ebce2b41.
+    This reverts commit 181df70bf628b80716d8950101a434e1ebce2b41.
 
-          Conflicts:
-              FixingMistakes.html
+    Conflicts:
+        FixingMistakes.html
 
-      commit c0d84f689b751f7d9bec63d0fb86711936966419
-      Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
-      Date:   Thu Dec 26 10:59:30 2013 -0600
+commit c0d84f689b751f7d9bec63d0fb86711936966419
+Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
+Date:   Thu Dec 26 10:59:30 2013 -0600
 
-          Spurious 3
+    Spurious 3
 
-      commit f832c8235ca08696f937ef0f094c00b5e05b84aa
-      Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
-      Date:   Thu Dec 26 10:59:06 2013 -0600
+commit f832c8235ca08696f937ef0f094c00b5e05b84aa
+Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
+Date:   Thu Dec 26 10:59:06 2013 -0600
 
-          Spurious 2
+    Spurious 2
 
-      commit faa8c71ed0fac5f9fc97a03e68c506195eab03e6
-      Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
-      Date:   Thu Dec 26 10:58:44 2013 -0600
+commit faa8c71ed0fac5f9fc97a03e68c506195eab03e6
+Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
+Date:   Thu Dec 26 10:58:44 2013 -0600
 
-          Spurious 1
+    Spurious 1
 
-      commit 181df70bf628b80716d8950101a434e1ebce2b41
-      Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
-      Date:   Thu Dec 26 10:48:23 2013 -0600
+commit 181df70bf628b80716d8950101a434e1ebce2b41
+Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
+Date:   Thu Dec 26 10:48:23 2013 -0600
 
-          Working on fixing page.
+    Working on fixing page.
 
-      commit 390b0692d6587b03f83d0355ec4eff0529d31bc7
-      Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
-      Date:   Tue Dec 24 11:59:36 2013 -0600
+commit 390b0692d6587b03f83d0355ec4eff0529d31bc7
+Author: Patrick O&#39;Hara &lt;patrick.ohara@cognex.com&gt;
+Date:   Tue Dec 24 11:59:36 2013 -0600
 
-          Starting to work on FixingMistakes.html
+    Starting to work on FixingMistakes.html
 
-      ...
-    `        </code></pre>
+...</code></pre>
 <p>  So you can see that there is a new commit that contains the changes necessary to get us back to that previous commit.  This is good if the history of this attempt is worth keeping, but what if this was just a false path?  You might think its just embaressment to want to remove these commits from history, but there is more to it than&nbsp;that.</p>
 <h3 id="the-purpose-of-history">The Purpose of&nbsp;History</h3>
 <p>  So this leads to a philosophy question.  Why are we tracking all this history?  What is the purpose of having these different commits recorded?  As with many things there are different purposes depending on what you are&nbsp;doing.</p>
@@ -228,35 +217,33 @@
 <li><p><strong>Release Manager</strong> Track features that make up a release and&nbsp;releases.</p>
 <p>In addition to ones responsibilities there is also a question of time.  We are much more likely to care about the individual commits made last week then we are the ones made last year (or six years&nbsp;ago).</p>
 <p>Git allows a great deal of flexibility with history.  Both in deciding what eventually gets shared with others (See Working with Others later in this tutorial), as well as in changing history.  The idea of changing history may seem odd or even dangerous.  There is a certain amount of risk is deciding to change the history in a local repository.  One should consider if this history has value to keep.  To do this you must think more like a Dev Lead or Release Manager than a Developer.  If you are considering removing a set of commits because you are embarrass by them you should seek a second opinion.  If you have tried something and it just did not work, then you may consider removing that history.  In the end Git is a tool and the decision is up to&nbsp;you.</p>
-<pre><code>`Git reset --hard HEAD~3`</code></pre>
+<p>git reset —hard&nbsp;<span class="caps">HEAD</span>~3</p>
 <p>Looking at the log now will show that rather than have a new commit that “undoes” the changes in those three commits, the three commits are no longer part of the history.  They are gone, but not forgotten.  Those commits are still in the repository for now.  Though <code>git log</code> shows that the <em>Working on fixing page.</em> is the latest commit, the command <code>git reflog</code> will show those spurious&nbsp;commits:</p>
-<pre><code>`
-  181df70 HEAD@{0}: checkout: moving from master to 181d
-  4952548 HEAD@{1}: reset: moving to HEAD~3
-  faa8c71 HEAD@{2}: reset: moving to HEAD~3
-  80be37f HEAD@{3}: commit: Revert &quot;Working on fixing page.&quot;
-  c0d84f6 HEAD@{4}: commit: Spurious 3
-  f832c82 HEAD@{5}: commit: Spurious 2
-  faa8c71 HEAD@{6}: commit: Spurious 1
-  181df70 HEAD@{7}: checkout: moving from 4952548d775dc7c8fd066764465abaec0da70394
-  4952548 HEAD@{8}: checkout: moving from master to 4952
-  181df70 HEAD@{9}: checkout: moving from master to master
-  181df70 HEAD@{10}: checkout: moving from 4952548d775dc7c8fd066764465abaec0da7039
-  4952548 HEAD@{11}: checkout: moving from master to 4952548d
-  181df70 HEAD@{12}: commit: Working on fixing page.
-  390b069 HEAD@{13}: commit: Starting to work on FixingMistakes.html
-  4952548 HEAD@{14}: commit (amend): Completed GettingStarted.html
-  82a8b57 HEAD@{15}: commit: Completed GettingStarted.html
-  ca93a4c HEAD@{16}: commit: Started working on Getting Started page
-  ca82493 HEAD@{17}: commit (amend): Wrote overview.
-  4665e1a HEAD@{18}: commit: Wrote overview.
-  9227e18 HEAD@{19}: commit (initial): Template commit
-`</code></pre>
+<p>181df70 <span class="caps">HEAD</span>@{0}: checkout: moving from master to 181d
+4952548 HEAD@{1}: reset: moving to HEAD~3
+faa8c71 HEAD@{2}: reset: moving to HEAD~3
+80be37f HEAD@{3}: commit: Revert “Working on fixing page.”
+c0d84f6 HEAD@{4}: commit: Spurious 3
+f832c82 HEAD@{5}: commit: Spurious 2
+faa8c71 HEAD@{6}: commit: Spurious 1
+181df70 HEAD@{7}: checkout: moving from 4952548d775dc7c8fd066764465abaec0da70394
+4952548 HEAD@{8}: checkout: moving from master to 4952
+181df70 HEAD@{9}: checkout: moving from master to master
+181df70 HEAD@{10}: checkout: moving from 4952548d775dc7c8fd066764465abaec0da7039
+4952548 HEAD@{11}: checkout: moving from master to 4952548d
+181df70 HEAD@{12}: commit: Working on fixing page.
+390b069 HEAD@{13}: commit: Starting to work on FixingMistakes.html
+4952548 HEAD@{14}: commit (amend): Completed GettingStarted.html
+82a8b57 HEAD@{15}: commit: Completed GettingStarted.html
+ca93a4c HEAD@{16}: commit: Started working on Getting Started page
+ca82493 HEAD@{17}: commit (amend): Wrote overview.
+4665e1a HEAD@{18}: commit: Wrote overview.
+9227e18 HEAD@{19}: commit (initial): Template&nbsp;commit</p>
 <p>If you had reset 4 commits instead of three (<code>git reset HEAD~4</code>), you could get back to the “right” commit by reseting to&nbsp;it:</p>
-<pre><code>`Git reset --hard 181df7`</code></pre>
+<p>git reset —hard&nbsp;181df7</p>
 <p>So long as the detached commits have not been “cleaned up”.  These detached commits remain in the repository until the <code>git gc</code> command is&nbsp;run.</p>
 <p>Git offers many options for correcting mistakes and oversights as we work.  These will become more clear as you use them.  The important take away is that in most cases it is possible to undo essentially anything in Git if you do so early.  As with any other system, the longer you wait to try and correct something more more involved it is to&nbsp;correct.</p>
-<p>Now that there is something worth sharing, we will look at how we go about <a href="/articles/fixing-mistakes/SharingWithOthers.html">sharing our changes with others</a>.</p>
+<p>Now that there is something worth sharing, we will look at how we go about <a href="../sharing-with-others/">sharing our changes with others</a>.</p>
 </li>
 </ul>
 </section>
