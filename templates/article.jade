@@ -4,6 +4,7 @@ extends layout
 block append vars
   - bodyclass = 'article-detail'
   - var thePage = page
+  - var theIndex = articles.indexOf(page)
 
 block prepend title
   | #{ page.title + " - "}
@@ -13,10 +14,18 @@ block header
 
 block content
   article.article
-    section.content!= typogr(page.html.replace(/\/articles\//g,'../')).typogrify()
+    section.content!= typogr(page.html.replace(/\/pages\//g,'../pages/')).typogrify()
+  
 
 block prepend footer
   div.nav
-    a(href=env.helpers.makeRelative(relativeTo, '/')) « Back
+    if (theIndex > 0)
+      a(href=env.helpers.makeRelative(relativeTo, articles[theIndex - 1].url)) &#171; Previous
+      
+    a(href=env.helpers.makeRelative(relativeTo, '/')) Index
+    
+    if (theIndex != articles.length - 1)
+      a(href=env.helpers.makeRelative(relativeTo, articles[theIndex + 1].url)) Next &#187; 
+    b= theArticle
 
 

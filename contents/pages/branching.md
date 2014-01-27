@@ -114,5 +114,5 @@ So let's look at the commands we've learned about for interacting with Git:
 - `git branch`
 - `git checkout`
 
-After going through the set of Git command a couple of times you will start to become comfortable with them.  Obviously this is not all that there is to know about Git.  Please consider what you [next steps](/pages/next-steps/) with Git may be.
+After going through the set of Git command a couple of times you will start to become comfortable with them.  Obviously this is not all that there is to know about Git.  Please consider what you [next steps](/pages/next-steps.html) with Git may be.
 

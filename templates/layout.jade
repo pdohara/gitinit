@@ -2,6 +2,7 @@ doctype
 block vars
   - var bodyclass = null;
   - var relativeTo = page != null ? page.url : '/'
+  - var articles = env.helpers.getArticles(contents)
 html(lang='en')
   head
     block head
@@ -17,7 +18,7 @@ html(lang='en')
     header.header
       div.content-wrap
         ul.pages
-          each article in env.helpers.getArticles(contents)
+          each article in articles
             li
               a(href=env.helpers.makeRelative(relativeTo, article.url))= article.title
               section.content
@@ -34,7 +35,3 @@ html(lang='en')
     footer
       div.content-wrap
         block footer
-          section.copy
-            p &copy; #{ new Date().getFullYear() } #{ locals.owner } &mdash; powered by&nbsp;
-              a(href='https://github.com/jnordberg/wintersmith') Wintersmith
-              //- please leave the "powered by" if you use the design
