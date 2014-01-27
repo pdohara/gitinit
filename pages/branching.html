@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    <title>Branching - Gitin' It
+    </title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Anonymous+Pro:400,700,400italic,700italic|Merriweather:400,700,300">
+    <link rel="stylesheet" href="../css/main.css">
+  </head>
+  <body class="article-detail">
+    <header class="header">
+      <div class="content-wrap">
+        <ul class="pages">
+          <li><a href="../pages/before-the-beginning.html">Before the Beginning</a>
+            <section class="content"></section>
+          </li>
+          <li><a href="../pages/getting-started.html">Getting Started</a>
+            <section class="content"></section>
+          </li>
+          <li><a href="../pages/fixing-mistakes.html">Fixing Mistakes</a>
+            <section class="content"></section>
+          </li>
+          <li><a href="../pages/sharing-with-others.html">Sharing With the Team</a>
+            <section class="content"></section>
+          </li>
+          <li><a href="../pages/branching.html">Branching</a>
+            <section class="content"></section>
+          </li>
+          <li><a href="../pages/next-steps.html">Next Steps</a>
+            <section class="content"></section>
+          </li>
+        </ul>
+        <h1>Branching</h1>
+      </div>
+    </header>
+    <div id="content">
+      <div class="content-wrap">
+        <article class="article">
+          <section class="content"><h2 id="branching">Branching</h2>
+<p>So far all of the work we have been doing has been on the <code>master</code> branch.  As we discussed earlier this is the default or trunk branch in a Git repository.  If you are working alone or with a very small team this may be enough.  However parallel development can be desirable for a number of different reasons.  Perhaps you wish to try something out.  Perhaps you are working on refactoring part of the system while others on your team continue to work on a new feature.  Whatever the reason it is not uncommon to wish to work in parallel (or isolation) from the master&nbsp;branch.</p>
+<h3 id="creating-a-branch">Creating a&nbsp;Branch</h3>
+<pre><code>git branch [branch name]</code></pre>
+<p>  This command will create a branch with the name specified.  In order to work on this branch you will need to change the repository to be focused on it using the checkout&nbsp;command.</p>
+<pre><code>git checkout [branch name]</code></pre>
+<p>Since this is a common workflow there is a shortcut version of this using only the checkout&nbsp;command: </p>
+<pre><code>git checkout -b [branch name]</code></pre>
+<p>So let’s assume you are refactoring while others continue to develop on master.  To create a branch called refactor you issue the command <code>git checkout -b refactor</code>.  At this point your repository could look like&nbsp;this: </p>
+<pre><code>4132fa --- b83f42 --- e51a09 --- 284617 (master)(origin\master)
+                                     \ (refactor)</code></pre>
+<p>The <code>origin</code> server will look like&nbsp;this:</p>
+<pre><code>4132fa --- b83f42 --- e51a09 --- 284617 (master)</code></pre>
+<p>Note that the branch will not show up on the <code>origin</code> server until we push it there.  So now you make some change and your repository looks like&nbsp;this: </p>
+<pre><code>e51a09 --- 284617 --- 3c07fd --- 4f7d6a (refactor)
+                 \ (master)</code></pre>
+<p>In the mean time your teammates have been working on the master branch so origin now looks like&nbsp;this:</p>
+<pre><code>e51a09 --- 284617 --- d17089 --- 32860a (master)</code></pre>
+<p>You want to stay current with what they are doing so you fetch the changes using <code>git fetch</code>, but you are not ready to combine the two lines of development so instead of using rebase, we are going to merge the changes into our refactor&nbsp;branch.</p>
+<pre><code>git merge master </code></pre>
+<p>Now your local repository will look something like&nbsp;this:</p>
+<pre><code>e51a09 --- 284617 --- d17089 --- 32860a (master)
+             \                          \
+              \ --- 3c07fd --- 4f7d6a --- 375a4d (refactor)</code></pre>
+<p>You can (and probably should) push these changes to the remote.  You already know the command to push changes is <code>git push</code>, but in this case we also want Git to remember that our local refactor branch should push to the new refactor branch on origin.  So the command will look like&nbsp;this:</p>
+<pre><code>git push -u origin refactor</code></pre>
+<p>This will push the new refactor branch to origin and setup the local refactor branch to track it.  This makes the local refactor branch a tracking branch of the origin refactor&nbsp;branch:</p>
+<pre><code>e51a09 --- 284617 --- d17089 --- 32860a (master)(origin/master)
+             \                          \
+              \ --- 3c07fd --- 4f7d6a --- 375a4d (refactor)(origin/refactor)</code></pre>
+<p>Now as you continue to work on the refactor branch you can use fetch and push without having to specify the remote branch you wish to fetch from or push to.  At some point you will be done with the work on the refactor branch.  Then you will want to merge the changes back to master.  Let’s say that your repository looks like&nbsp;this:</p>
+<pre><code>e51a09 --- 284617 --- d17089 --- 32860a -- 3f450a (master)(origin/master)
+             \                          \
+              \ --- 3c07fd --- 4f7d6a --- 375a4d --- 3f670a --- 4d2a3c (refactor)(origin/refactor)</code></pre>
+<p>To merge the changes to the master branch you will checkout the master branch and then&nbsp;merge:</p>
+<pre><code>git checkout master
+git merge refactor</code></pre>
+<p>After resolving and conflicts your repository will look like&nbsp;this:</p>
+<pre><code>                                               /(origin/master)
+e51a09 --- 284617 --- d17089 --- 32860a -- 3f450a ----------------- 276a54 (master)
+             \                          \                           /
+              \ --- 3c07fd --- 4f7d6a --- 375a4d --- 3f670a --- 4d2a3c (refactor)(origin/refactor)</code></pre>
+<p>  Now you are ready to puch the changes to share with the rest of your&nbsp;team.</p>
+<h3 id="merging-vs-rebasing">Merging vs.&nbsp;Rebasing</h3>
+<p>In the previous section we used the <code>git rebase</code> command to combine the changes from the remote master branch with the changes on our master branch.  This resulted in all the changes having a straight line history.  In this section we have been using merge to combine changes from different branches.  This creates a new commit on the current branch with all the changes from the other branch.  This is done, so that the history in the repository will tell the story we want it to tell.  When you are working a branch and someone else is also working on that same branch we want the history in the repository to show that as a single branch.  So in this case we use rebase and&nbsp;this:</p>
+<pre><code>9227e1 --- ca8249 --- ca93a4 --- 495254 (master)
+                \ --- 390b06 --- 181df7 (origin/master)</code></pre>
+<p>becomes&nbsp;this:</p>
+<pre><code>9227e1 --- ca8249 --- ca93a4 --- 495254 --- f62e30 --- a993fe (master)(origin/master)</code></pre>
+<p>On the other hand When we where working on on the refactor branch we want that to show as a branch of development se we used the merge&nbsp;command:</p>
+<pre><code>e51a09 --- 284617 --- d17089 --- 32860a -- 3f450a ----------------- 276a54 (master)(origin/master)
+             \                          \                           /
+              \ --- 3c07fd --- 4f7d6a --- 375a4d --- 3f670a --- 4d2a3c (refactor)(origin/refactor)</code></pre>
+<p>The choice of merge vs. rebase is a choice of how the repository will be structured when we are done.  So you will typically use rebase to work on a branch and merge to bring branches back&nbsp;together.</p>
+<h4 id="git-pull">Git&nbsp;Pull</h4>
+<p><code>git pull</code> is a shorthand version of <code>get fetch</code> and <code>git merge</code>.  People new to Git will often make the mistake of assuming <code>git pull</code> and <code>git push</code>.  This will work fine but it will create a repository that looks like you create branches all the time for no real reason.  Most Git users use fetch and rebase rather than&nbsp;pull.</p>
+<h2 id="review">Review</h2>
+<p>So let’s look at the commands we’ve learned about for interacting with&nbsp;Git:</p>
+<ul>
+<li><code>git clone [URL]</code></li>
+<li><code>git add</code></li>
+<li><code>git commit</code></li>
+<li><code>git fetch</code></li>
+<li><code>git rebase</code></li>
+<li><code>git push</code></li>
+<li><code>git branch</code></li>
+<li><code>git checkout</code></li>
+</ul>
+<p>After going through the set of Git command a couple of times you will start to become comfortable with them.  Obviously this is not all that there is to know about Git.  Please consider what you <a href="../pages/next-steps.html">next steps</a> with Git may&nbsp;be.</p>
+</section>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="content-wrap">
+        <div class="nav"><a href="../pages/sharing-with-others.html">&#171; Previous</a><a href="../">Index</a><a href="../pages/next-steps.html">Next &#187; </a><b></b>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
