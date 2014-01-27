@@ -1,6 +1,7 @@
 ---
 title: Getting Started
 template: article.jade
+order: 1
 ----
 ###Getting to Know Git
 

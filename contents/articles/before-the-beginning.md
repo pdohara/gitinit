@@ -1,5 +1,8 @@
-Before the Begining
-===================
+---
+title: Before the Beginning
+template: article.jade
+order: 0
+----
 
 There are a few things to cover before we start talking about Distributed Version Control with Git.  Before we start talking about Distributed Version Control you need to understand what Version Control is.  If you are already familiar with Version Control you can skip to Rethinking Version Control.
 

@@ -1,6 +1,7 @@
 ---
 title: Next Steps
 template: article.jade
+order: 5
 ----
 
 ##Git Book

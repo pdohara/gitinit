@@ -1,6 +1,7 @@
 ---
 title: Branching
 template: article.jade
+order: 4
 ----
 
 ##Branching
