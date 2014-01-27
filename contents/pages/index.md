@@ -21,5 +21,5 @@ Note: If you have never used a revision control system before (SVN, CVS, Perforc
   By now you may be thinking that it sounds like there is a lot more stuff to do with a DVCS than with a "traditional" revision control system.  The truth is there is a lot more stuff that you can do and a little more stuff that you have to do.  There is some additional overhead (more commands, more choices) with a DVCS, but that provides a great deal more flexibility.
   Enough overview, let's take a look at how this works.
 
-[Getting Started](./articles/getting-started/)
+[Getting Started](pages/getting-started.html)
 

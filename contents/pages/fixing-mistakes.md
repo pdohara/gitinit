@@ -255,5 +255,5 @@ order: 2
 
   Git offers many options for correcting mistakes and oversights as we work.  These will become more clear as you use them.  The important take away is that in most cases it is possible to undo essentially anything in Git if you do so early.  As with any other system, the longer you wait to try and correct something more more involved it is to correct.
 
-  Now that there is something worth sharing, we will look at how we go about [sharing our changes with others](../sharing-with-others/).
+  Now that there is something worth sharing, we will look at how we go about [sharing our changes with others](/pages/sharing-with-others.html).
 

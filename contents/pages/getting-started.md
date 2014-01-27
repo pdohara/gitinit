@@ -71,5 +71,5 @@ order: 1
 
   Although it is common to wish to add everything that has changed, sometimes we want to be a little more selective.  The command `git add GettingStarted.html` will add only the file specified.  Another way to be selective is to use the command `get add -i`.  This command will present a menu that will walk you through adding files and even changes (hunks) within files that you wish to stage.
 
-  Note that you do not have to plan for the files you wish to modify.  You just make changes and Git notices those changes, you stage them and then commit them.  If you are working on your own this is all the workflow that you need.  As with any endeavor you will make mistakes from time to time, so let's talk about [fixing mista<span style="text-decoration: line-through;">t</span>kes](./page/fixing-mistakes).
+  Note that you do not have to plan for the files you wish to modify.  You just make changes and Git notices those changes, you stage them and then commit them.  If you are working on your own this is all the workflow that you need.  As with any endeavor you will make mistakes from time to time, so let's talk about [fixing mista<span style="text-decoration: line-through;">t</span>kes](/pages/fixing-mistakes.html).
 

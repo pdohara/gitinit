@@ -114,5 +114,5 @@ becomes this:
 - `git branch`
 - `git checkout`
 
-  After going through the set of Git command a couple of times you will start to become comfortable with them.  Obviously this is not all that there is to know about Git.  Please consider what you [next steps](../next-steps/) with Git may be.
+  After going through the set of Git command a couple of times you will start to become comfortable with them.  Obviously this is not all that there is to know about Git.  Please consider what you [next steps](/pages/next-steps/) with Git may be.
 
