@@ -4,20 +4,22 @@ template: article.jade
 order: 5
 ----
 
+# Next Steps
+
+  Now that you have an idea how Git works.  What are the next steps?  First you need to use Git.  I recommend spending a little time using the command line tools.  This will help you to become comfortable with the concepts you have learned.  The danger that the various GUIs for Git have is that they often use different names.  This is fine until you want to ask a question of someone else.  If you are not speaking the same language (using the same words) then you are going to end up frustrated and not get an answer to your question.
+  If you want to know more about Git, or you need a reminder about how a command works, take a look at these resources.
+
+## Git User Manual
+
+http://schacon.github.io/git/user-manual.html
+
 ##Git Book
 
 http://www.git-scm.com/book
 
 ##Other Tutorials
 
+http://www.jackmaney.com/post/git_for_ages_4_and_up
 http://marklodato.github.io/visual-git-guide/index-en.html
-https://www.atlassian.com/git/tutorial
+http://gitready.com/
 
-
-*TODO Evaluate*
-http://www.sbf5.com/~cduan/technical/git/
-http://gitimmersion.com/
-http://net.tutsplus.com/tutorials/other/easy-version-control-with-git/
-http://try.github.io/levels/1/challenges/1
-http://www.vogella.com/tutorials/Git/article.html
-http://git-scm.com/docs/gittutorial
