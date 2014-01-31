@@ -25,6 +25,10 @@ Now Git will remmeber these settings for all repositories where you have not set
 
 Note in this case we have updated the system configuration which will apply to anyone using Git on this machine.  Git looks fir the first place to find a configuration setting.  It looks first in the repository config, then your user config and finally in the system config file.
 
+  TODO 
+
+  git config --core.autocrlf true
+
 Now that Git know who we are let's add some files.
 
 	Git init
@@ -69,5 +73,11 @@ A couple of things to note.  The `[master  ca93a4c]` tells you that the commit w
 
 Although it is common to wish to add everything that has changed, sometimes we want to be a little more selective.  The command `git add GettingStarted.html` will add only the file specified.  Another way to be selective is to use the command `get add -i`.  This command will present a menu that will walk you through adding files and even changes (hunks) within files that you wish to stage.
 
+TODO Talk about how a commit captures all the changes, not just the changes to a specific file.
+
 Note that you do not have to plan for the files you wish to modify.  You just make changes and Git notices those changes, you stage them and then commit them.  If you are working on your own this is all the workflow that you need.  As with any endeavor you will make mistakes from time to time, so let's talk about [fixing mista<span style="text-decoration: line-through;">t</span>kes](/pages/fixing-mistakes.html).
+
+Note that because this is all on your disk, you can (and should) commit files routinely.  In centralized version control systems commiting files is often avoided because they are immediately shared with everyone else on the team.  In Git sharing comes later, when you decide it is time too, so go ahead and commit changes as you go.
+
+TODO Add another commit here and talk about Changesets as apposed to State.
 

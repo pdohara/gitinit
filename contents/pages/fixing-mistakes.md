@@ -93,7 +93,9 @@ Although this changes the state of the working files to the commit specified, it
 
     HEAD is now at 4952548... Completed GettingStarted.html
 
-Git is telling you that you are looking at a historical commit.  You cannot work here, unless you create a branch.  This is fine if we just wanted to look at the state of the files for this commit, but since we want to move back to this commit we need to try a different approach.
+Git is telling you that you are looking at a commit that isn't tagged.  You can work here, but it will be difficult to get back here unless you tag this commit.  If we just wanted to look at the state of the files for this commit this is fine. However, since we want to move back to this commit we need to better understand how Git tracks commits.
+
+TODO Explain Commits and Tags
 
 Consider the following history:
 
@@ -256,4 +258,6 @@ So long as the detached commits have not been "cleaned up".  These detached comm
 Git offers many options for correcting mistakes and oversights as we work.  These will become more clear as you use them.  The important take away is that in most cases it is possible to undo essentially anything in Git if you do so early.  As with any other system, the longer you wait to try and correct something more more involved it is to correct.
 
 Now that there is something worth sharing, we will look at how we go about [sharing our changes with others](/pages/sharing-with-others.html).
+
+TODO Need to work in the idea of rewriting history, but not changing it.
 
