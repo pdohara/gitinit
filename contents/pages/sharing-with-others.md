@@ -4,6 +4,11 @@ template: article.jade
 order: 3
 ----
 
+#### Distributed Storage
+ 
+ Git (and other Distributed Version Control Systems DVCS's) allow for more than a single store of versions.  Typically there is a repository on your machine and there is a repository on another machine.  There can be a central machine that everyone shares their changes with.  This is the most like a traditional version control system.  If your project is setup in functional teams there could be a repository for each team.  The developers on that team share their changes to the teams shared repository, then the team lead decides what changes should go to the project repository and be built with all the other teams work.  In this case a team can choose to pull changes from another team (directly, not through the project server), to ensure that a difficult merge is given the time that it should be.  There are many workflows that are possible with a DVCS that would be difficult to do with a traditional version control system.  This also means that there are new commands used by a DVCS and that it takes some time to become accustome to how this new tool works.
+ 
+
 Before you can share with others, you need to decide where you will be sharing.  Everything that has been done up to this point in the tutorial has happened on a single machine.  The commits that we have been doing have been recorded to the repository on the local machine.  The good part of this is that commits are very fast and we can do them when we do not have access to a "server".  The other side of it is that a commit does not save the information to another machine.  To share with others we need a "server" to push our code to so everyone can have access.
 
 ###Git Server Options
