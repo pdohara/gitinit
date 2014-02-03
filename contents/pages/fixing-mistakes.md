@@ -4,217 +4,186 @@ template: article.jade
 order: 2
 ----
 
-Part of the reason for tracking versions is because things do not always go as planned.  Let's assume that are looking over your work (not making any changes yet) and then you notice that Git says there are changes to the file.  So you look at the diff and discover your editor has changed all the tabs to spaces.  This wasn ot a change you intended to make.  You can change the setting in the editor, but how do we get the file back the way it was?
+## Taking Stock
 
+  Let's take a look at what we have done so far:
 
+	git log
+	
+	commit f6d26b1b816ff88a7544e3ac605fda59fae26413
+	Author: Fred Foyle <fred.foyle@example.com>
+	Date:   Sat Feb 1 20:44:51 2014 -0600
+	
+	    Added Micheal
+	
+	commit 7576855c65228c16cbf6151bcd68f167791e4958
+	Author: Fred Foyle <fred.foyle@example.com>
+	Date:   Sat Feb 1 20:23:13 2014 -0600
+	
+	    Initial commit
+	
+  Here git is telling us what commits it is tracking, when they occured, who did them and what the comment was.  This is good information, but the display is a little verbose.  As the number of commits increases we are going to have a real issue looking at more than a little of the history at a time.  Fortunately the log command allows for us to change the output:
 
-This command commits what every you have staged as part of the last commit to the repository.  In this way you can add that missed file, or forgotten copyright update, or what ever occurs to you just after you commit your changes.
+	git log --decorate --graph --oneline --date-order
+	* f6d26b1 (HEAD, master) Added Micheal
+	* 7576855 Initial commit
 
-Sometimes we want our SCM tool to get us out of trouble.  It can be wonderful to just get back to a know good point.  Let's assume that are looking over your work (not making any changes yet) and then you notice that Git says there are changes to the files.  So you look at the diff and discover your editor has changed all the tabs to spaces.  This wasn't a change you intended to make.  You can change the setting in the editor, but how do we get the file back the way it was?  Let's start by making sure we know what has changed.
+  This is very concise, but we have lost much of the information.  We can customise it further though:
+TODO-Mac How do I specify colors here?
 
-    git status
+	git log --graph --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short
+	* f6d26b1 - (HEAD, master) Added Micheal (14 hours ago) <Fred Foyle>
+	* 7576855 - Initial commit (14 hours ago) <Fred Foyle>
 
-If you remember the output will look something like this:
+  We have all the information and it is pretty concise, but I really don't want to type in that command line ever again.  Git has a solution for this as well:
 
-    # On branch master
-    # Changes to be committed:
-    #   (use "git reset HEAD <file>..." to unstage)
-    #
-    #       new file:   GettingStarted.html
-    #       modified:   index.html
-    #
-    # Untracked files:
-    #   (use "git add <file> to include in what will be committed)
-    #
-    #       FixingMistakes.html
-    #       SharingWithOthers.html
+	git config --global alias.hist "log --graph --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short"
 
-To go back to a clean slate (no changes) we can use the checkout command:
+  Now we can just type:
 
-    git checkout [filename]
+	git hist
 
-This will replace the file with the latest version of the file from the repository.  This works fine for one or two files, but if you have many changes that need to be undone, then the reset command is more appropriate.
+  and get that formated log output.  Make sure you include the double quotes to the whole line is entered for the alias.  If you would prefer to edit the config file directly, you just need to open ~/.gitconfig.  On Windows this will be in your home folder (which depends on the version of Windows you are running).
 
-    git reset --hard
+	[user]
+	        name = Fred Foyle
+	        email = fred.foyle@example.com
+	[core]
+	        excludesfile = /Users/mmyself/.gitignore_global
+	        editor = vim
+	        autocrlf = true
+	[alias]
+	        hist = log --graph --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short
+	[merge]
+	        tool = vimdiff
 
-This command will reset the working files and the index (stage area).  Using `--mixed` will reset the index but not change the working files.  This is the default behavior.
+  This may be an easier way to edit your alias list.  You can build an alias of any command.  For instance some people prefer to type `co` rather than `checkout`.  The thing to remember is that you are entering the command line after git.  Some operatings systems also allow you to create an alias for commands.  This is a case of doing what makes the most sense for your environment.
 
-Sometimes we make changes and commit them and then decide that this was a bad idea and we wish to go back to a previous state.  You can checkout a previous commit.  First you need to identify what state you wish to get back to.  The log command will show you a list of your previous commits.
+## Fixing Mistakes
 
-    git log
+  Part of the reason for tracking versions is because things do not always go as planned.  Consider that Micheal (Fred's Son) has run a script to put a bunch of names into our directory file.  After running it, he looks at the file and discovers that he forgot to have the script put end of line makes between the names.  Obviously he needs to fix the script, but he would also like to get the file back to where it was.  First let's look at what is different:
 
-    commit 390b0692d6587b03f83d0355ec4eff0529d31bc7
-    Author: Patrick O'Hara <patrick.ohara@cognex.com>
-    Date:   Tue Dec 24 11:59:36 2013 -0600
+	git status
+	# On branch master
+	# Changes not staged for commit:
+	#   (use "git add <file>..." to update what will be committed)
+	#   (use "git checkout -- <file>..." to discard changes in working directory)
+	#
+	#	modified:   Directory.txt
+	#
+	no changes added to commit (use "git add" and/or "git commit -a")
 
-        Starting to work on FixingMistakes.html
+  Here we see that only the Directory.txt file has changed.  It is always a good idea to look at the changes before we reset them so we know what we are losing.  If you are accusomed to other version control tools you might think we can get rid of the changes to this file by geting the master branch again.
 
-    commit 4952548d775dc7c8fd066764465abaec0da70394
-    Author: Patrick O'Hara <patrick.ohara@cognex.com>
-    Date:   Tue Dec 24 11:25:23 2013 -0600
+	git checkout master
+	M	Directory.txt
+	Already on 'master'
 
-        Completed GettingStarted.html
+  This doesn't work because checking out a branch in Git is simply moving the HEAD tag to the tip of the branch you specify.  This is why it is very quick, but Git doesn't change the modified files unless you tell Git to:
 
-    commit ca93a4cecd5bd185d12ea96856d3bb60b3a28104
-    Author: Patrick O'Hara <patrick.ohara@cognex.com>
-    Date:   Tue Dec 24 11:00:12 2013 -0600
+	git checkout --force master
+	Already on 'master'
 
-        Started working on Getting Started page
+  Now we are back to where we wanted to be.  What if we had added that file to the staging area, but not commited it yet?  Git has a command for clearing the staging area (index):
 
-    commit ca82493642326df3f7461dfa87a34959f2327810
-    Author: Patrick O'Hara <patrick.ohara@cognex.com>
-    Date:   Tue Dec 24 10:24:53 2013 -0600
+	git reset
+	Unstaged changes after reset:
+	M	Directory.txt
 
-        Wrote overview.
+  Notice that though Git removed the file from the staging area it did not reset the file.  To ask Git to do that also you add the hard command line option:
 
-    commit 9227e1863089295a81c87ed3e631b1efe2a4c93a
-    Author: Patrick O'Hara <patrick.ohara@cognex.com>
-    Date:   Tue Dec 24 09:20:46 2013 -0600
+	git reset --hard
+	HEAD is now at dfa5664 Added Micheal
 
-        Template commit
+  So far we have been talking about mistakes that we catch before the commit.  What can we do if we catch the error after the commit?  Let's say that Fred has added an entry for his sister Cheryl.  So he copies her picture into the folder (Cheryl.jpg) and edits the Directory.txt file.
 
+	git status
+	# On branch master
+	# Changes not staged for commit:
+	#   (use "git add <file>..." to update what will be committed)
+	#   (use "git checkout -- <file>..." to discard changes in working directory)
+	#
+	#	modified:   Directory.txt
+	#
+	# Untracked files:
+	#   (use "git add <file>..." to include in what will be committed)
+	#
+	#	Cheryl.jpg
+	no changes added to commit (use "git add" and/or "git commit -a")
+	git add Directory.txt 
+	git commit -m "Added Cheryl"
+	[master f980833] Added Cheryl
+	 1 file changed, 1 insertion(+)
 
-The commit identifiers are a little scary at first.  The good news is that you do not have to type the whole SHA1 ID, just enough to make it unique.  So if we wanted to get back to the Completed GettingStarted.html commit we can run the command:
+  Oops, he just added the changes to the Directory.txt file, but not her picture.  Obviously, we could do another commit and add the picture, but we would like to have this be a single commit.  Git allows us to recover from this mistake by amending that commit:
 
-    git checkout 495254
+	git add Cheryl.jpg 
+	git commit --amend
+	[master 10a326c] Added Cheryl
+	 2 files changed, 1 insertion(+)
+	 create mode 100644 Cheryl.jpg
 
-Although this changes the state of the working files to the commit specified, it also results in a warning:
+  Now if we look at the history of our repository:
 
-    Note: checking out '4952'.
+	* 10a326c - (HEAD, master) Added Cheryl (87 seconds ago) <Fred Foyle>
+	* dfa5664 - Added Micheal (17 minutes ago) <Fred Foyle>
+	* 7576855 - Initial commit (15 hours ago) <Fred Foyle>
 
-    You are in 'detached HEAD' state. You can look around, make experimental
-    changes and commit them, and you can discard any commits you make in this
-    state without impacting any branches by performing another checkout.
+  We have the three commits, and the last commit contains both the change to the Directory.txt file and the new file Cheryl.jpg.  But doesn't that mean we changed history?  Yes it does.  We'll talk about this a little more in a minute, but first let's get back to amending commits'.  Note that we did not specify which commit we wanted to amend.  That is because Git only allows you to amend that last commit.  This is good for those situations when you press enter on the commit command and then realize that you have forgotten that new file.  What do we do if we made a mistake a couple of commits ago?  If you made a change some time ago and it has become apeparant that it was a mistake you can revert that change using:
 
-    If you want to create a new branch to retain commits you create, you may
-    do so (now or later) by using -b with the checkout command again. Example:
+	git revert dfa5664
 
-      git checkout -b new_branch_name
+  This command makes a new commit that undoes the changes that were made by commit dfa5664.  Note that since Git is storing the changes that were made (rather than the state of the files after the changes) it know what actions were taken and therefore what actions are needed to undo those changes.  The number (dfa5664) is a commit idenitfier.  It is the first 7 characters from the SHA1 hash.  The commit identifiers are a little scary at first.  The good news is that you do not have to type the whole SHA1 ID, just enough to make it unique.  You can also use a Tag inplace of a commit identifier in most commands.  You can also specify a commit relative to a tag.  Since this commit is one behind the HEAD tag (current pointer) you could use the command:
 
-    HEAD is now at 4952548... Completed GettingStarted.html
+	git revert HEAD~1
 
-Git is telling you that you are looking at a commit that isn't tagged.  You can work here, but it will be difficult to get back here unless you tag this commit.  If we just wanted to look at the state of the files for this commit this is fine. However, since we want to move back to this commit we need to better understand how Git tracks commits.
+  If you do this you will likely get a conflict.  Git shows you that like this:
 
-TODO Explain Commits and Tags
+	Fred Foyle,415-555-3467,ffoyle.jpg
+	<<<<<<< HEAD
+	Micheal Foyle,415-555-3467,MichealF.jpg
+	Cheryl Motague,413-555-8725,Cheryl.jpg
+	
+	=======
+	>>>>>>> parent of dfa5664... Added Micheal
 
-Consider the following history:
+  From the line that starts with `<<<<<<<` to the line that starts with `=======` is one side of the conflict.  The other side of the conflict is from the line that starts with `=======` to the line that starts with `>>>>>>>`.  You can edit the file directly, removing these lines and making the way you want.  Alternately you can use most Diff/Merge tools to graphically resolve this conflict.  Note that Git did not commit this change because of the conflict, but if there hadn't been a conflict then Git would have commited the change.  If you want to run the command but not commit the result you can add the no-commit command line option:
 
-    commit c0d84f689b751f7d9bec63d0fb86711936966419
-    Author: Patrick O'Hara <patrick.ohara@cognex.com>
-    Date:   Thu Dec 26 10:59:30 2013 -0600
+	git revert --no-commit HEAD~1
 
-        Spurious 3
+  Maybe we just want to look at the state of the files from that commit.  You can checkout any commit in the repository.
 
-    commit f832c8235ca08696f937ef0f094c00b5e05b84aa
-    Author: Patrick O'Hara <patrick.ohara@cognex.com>
-    Date:   Thu Dec 26 10:59:06 2013 -0600
+	git checkout dfa5664
+	Note: checking out 'dfa5664'.
+	
+	You are in 'detached HEAD' state. You can look around, make experimental
+	changes and commit them, and you can discard any commits you make in this
+	state without impacting any branches by performing another checkout.
+	
+	If you want to create a new branch to retain commits you create, you may
+	do so (now or later) by using -b with the checkout command again. Example:
+	
+	  git checkout -b new_branch_name
 
-        Spurious 2
+	HEAD is now at dfa5664... Added Micheal
 
-    commit faa8c71ed0fac5f9fc97a03e68c506195eab03e6
-    Author: Patrick O'Hara <patrick.ohara@cognex.com>
-    Date:   Thu Dec 26 10:58:44 2013 -0600
+  Although this changes the state of the working files to the commit specified, it also results in a warning.  Git is telling you that you are looking at a commit that isn't tagged.  You can work here, but it will be difficult to get back here unless you tag this commit.  If we just wanted to look at the state of the files for this commit this is fine. If we wanted to move back in history and get rid of that last commit we can use the reset command:
 
-        Spurious 1
+    git reset dfa5664
 
-    commit 181df70bf628b80716d8950101a434e1ebce2b41
-    Author: Patrick O'Hara <patrick.ohara@cognex.com>
-    Date:   Thu Dec 26 10:48:23 2013 -0600
+  or
 
-        Working on fixing page.
-
-    commit 390b0692d6587b03f83d0355ec4eff0529d31bc7
-    Author: Patrick O'Hara <patrick.ohara@cognex.com>
-    Date:   Tue Dec 24 11:59:36 2013 -0600
-
-        Starting to work on FixingMistakes.html
-
-    commit 4952548d775dc7c8fd066764465abaec0da70394
-    Author: Patrick O'Hara <patrick.ohara@cognex.com>
-    Date:   Tue Dec 24 11:25:23 2013 -0600
-
-        Completed GettingStarted.html
-
-    commit ca93a4cecd5bd185d12ea96856d3bb60b3a28104
-    Author: Patrick O'Hara <patrick.ohara@cognex.com>
-    Date:   Tue Dec 24 11:00:12 2013 -0600
-
-        Started working on Getting Started page
-
-    commit ca82493642326df3f7461dfa87a34959f2327810
-    Author: Patrick O'Hara <patrick.ohara@cognex.com>
-    Date:   Tue Dec 24 10:24:53 2013 -0600
-
-        Wrote overview.
-
-    commit 9227e1863089295a81c87ed3e631b1efe2a4c93a
-    Author: Patrick O'Hara <patrick.ohara@cognex.com>
-    Date:   Tue Dec 24 09:20:46 2013 -0600
-
-        Template commit
-
-Let us assume that those last three commits where a mistake.  So I would like to get back to the state for commit 181df70bf628b80716d8950101a434e1ebce2b41.  The command to get back to that state is:
-
-    git reset 181df70bf628b80716d8950101a434e1ebce2b41
-
-  Or
-
-    git reset 181df7
-
-In this case there is another way to specify a commit that may be more useful.  We want to backup 3 commits, so we can specify the commit relative to our current (HEAD) position.
-
-    git reset HEAD~3
+    git reset HEAD~1
 
 After running this command the history will look like this:
 
-    commit 80be37ff9f4edc2c699ec05d7b3c6d4f1cc60bb1
-    Author: Patrick O'Hara <patrick.ohara@cognex.com>
-    Date:   Thu Dec 26 11:04:38 2013 -0600
+	git hist
+	* dfa5664 - (HEAD) Added Micheal (54 minutes ago) <Fred Foyle>
+	* 7576855 - Initial commit (16 hours ago) <Fred Foyle>
 
-        Revert "Working on fixing page."
+### Changing History
 
-        This reverts commit 181df70bf628b80716d8950101a434e1ebce2b41.
-
-        Conflicts:
-            FixingMistakes.html
-
-    commit c0d84f689b751f7d9bec63d0fb86711936966419
-    Author: Patrick O'Hara <patrick.ohara@cognex.com>
-    Date:   Thu Dec 26 10:59:30 2013 -0600
-
-        Spurious 3
-
-    commit f832c8235ca08696f937ef0f094c00b5e05b84aa
-    Author: Patrick O'Hara <patrick.ohara@cognex.com>
-    Date:   Thu Dec 26 10:59:06 2013 -0600
-
-        Spurious 2
-
-    commit faa8c71ed0fac5f9fc97a03e68c506195eab03e6
-    Author: Patrick O'Hara <patrick.ohara@cognex.com>
-    Date:   Thu Dec 26 10:58:44 2013 -0600
-
-        Spurious 1
-
-    commit 181df70bf628b80716d8950101a434e1ebce2b41
-    Author: Patrick O'Hara <patrick.ohara@cognex.com>
-    Date:   Thu Dec 26 10:48:23 2013 -0600
-
-        Working on fixing page.
-
-    commit 390b0692d6587b03f83d0355ec4eff0529d31bc7
-    Author: Patrick O'Hara <patrick.ohara@cognex.com>
-    Date:   Tue Dec 24 11:59:36 2013 -0600
-
-        Starting to work on FixingMistakes.html
-
-    ...
-
-So you can see that there is a new commit that contains the changes necessary to get us back to that previous commit.  This is good if the history of this attempt is worth keeping, but what if this was just a false path?  You might think its just embaressment to want to remove these commits from history, but there is more to it than that.
-
-###The Purpose of History
-
-So this leads to a philosophy question.  Why are we tracking all this history?  What is the purpose of having these different commits recorded?  As with many things there are different purposes depending on what you are doing.
+  As we can see Git definitely let's us change the history in our repository.  So this leads to a philosophy question.  Why are we tracking all this history?  What is the purpose of having these different commits recorded?  As with many things there are different purposes depending on what you are doing.
 
   - **Developer** Keep track of where I am and be able to fix mistakes.
   - **Dev Lead** Track the state of different features.
@@ -222,42 +191,55 @@ So this leads to a philosophy question.  Why are we tracking all this history?  
 
 In addition to ones responsibilities there is also a question of time.  We are much more likely to care about the individual commits made last week then we are the ones made last year (or six years ago).
 
-Git allows a great deal of flexibility with history.  Both in deciding what eventually gets shared with others (See Working with Others later in this tutorial), as well as in changing history.  The idea of changing history may seem odd or even dangerous.  There is a certain amount of risk is deciding to change the history in a local repository.  One should consider if this history has value to keep.  To do this you must think more like a Dev Lead or Release Manager than a Developer.  If you are considering removing a set of commits because you are embarrass by them you should seek a second opinion.  If you have tried something and it just did not work, then you may consider removing that history.  In the end Git is a tool and the decision is up to you.
+Git allows a great deal of flexibility with history.  Both in deciding what eventually gets shared with others (See Working with Others later in this tutorial), as well as in correcting history.  The idea of changing history may seem odd or even dangerous.  There is a certain amount of risk is deciding to change the history in a local repository.  One should consider if this history has value to keep.  To do this you must think more like a Dev Lead or Release Manager than a Developer.  If you are considering removing a set of commits because you are embarrass by them you should seek a second opinion.  If you have tried something and it just did not work, then you may consider removing that history.  In the end Git is a tool and the decision is up to you.
+  There is another consideration about making changes to history.  We are going to learn about sharing our repository with others.  If you have shared your repository then it is almost always a bad idea to change history in that repository.  If you amend a commit, or reset changes that someone else has already based new commits on you will create a mess that will be difficult to resolve.  Git will warn you about commands that may cause difficulty on public commits, but it is up to you to decide.  the rule of thumb is if you can shared the commits don't change them.
 
-    git reset --hard HEAD~3
+## Are They Really Gone?
 
-Looking at the log now will show that rather than have a new commit that "undoes" the changes in those three commits, the three commits are no longer part of the history.  They are gone, but not forgotten.  Those commits are still in the repository for now.  Though `git log` shows that the _Working on fixing page._ is the latest commit, the command `git reflog` will show those spurious commits:
+  Since we are talking about editing the repository and fixing mistakes, what happens if we make a mistake while editing the repository?  Are those changes permanent? Not yet.
 
-    181df70 HEAD@{0}: checkout: moving from master to 181d
-    4952548 HEAD@{1}: reset: moving to HEAD~3
-    faa8c71 HEAD@{2}: reset: moving to HEAD~3
-    80be37f HEAD@{3}: commit: Revert "Working on fixing page."
-    c0d84f6 HEAD@{4}: commit: Spurious 3
-    f832c82 HEAD@{5}: commit: Spurious 2
-    faa8c71 HEAD@{6}: commit: Spurious 1
-    181df70 HEAD@{7}: checkout: moving from 4952548d775dc7c8fd066764465abaec0da70394
-    4952548 HEAD@{8}: checkout: moving from master to 4952
-    181df70 HEAD@{9}: checkout: moving from master to master
-    181df70 HEAD@{10}: checkout: moving from 4952548d775dc7c8fd066764465abaec0da7039
-    4952548 HEAD@{11}: checkout: moving from master to 4952548d
-    181df70 HEAD@{12}: commit: Working on fixing page.
-    390b069 HEAD@{13}: commit: Starting to work on FixingMistakes.html
-    4952548 HEAD@{14}: commit (amend): Completed GettingStarted.html
-    82a8b57 HEAD@{15}: commit: Completed GettingStarted.html
-    ca93a4c HEAD@{16}: commit: Started working on Getting Started page
-    ca82493 HEAD@{17}: commit (amend): Wrote overview.
-    4665e1a HEAD@{18}: commit: Wrote overview.
-    9227e18 HEAD@{19}: commit (initial): Template commit
+	git reflog
 
-If you had reset 4 commits instead of three (`git reset HEAD~4`), you could get back to the "right" commit by reseting to it:
+  Let's say that I had made a mistaken commit, then used reset to remove it.  My reflog would look something like this:
 
-    git reset --hard 181df7
+	git commit -m "It's a mistake"
+	git reset HEAD~1
+	git hist
+	* 10a326c - (HEAD, master) Added Cheryl (3 hours ago) <Fred Foyle>
+	* dfa5664 - Added Micheal (3 hours ago) <Fred Foyle>
+	* 7576855 - Initial commit (18 hours ago) <Fred Foyle>
+	git reflog
+	10a326c HEAD@{0}: reset: moving to HEAD~1
+	1b922e7 HEAD@{1}: commit: It's a mistake
+	10a326c HEAD@{5}: commit (amend): Added Cheryl
+	f980833 HEAD@{6}: commit: Added Cheryl
+	dfa5664 HEAD@{7}: commit (amend): Added Micheal
+	f6d26b1 HEAD@{8}: checkout: moving from master to master
+	f6d26b1 HEAD@{9}: checkout: moving from master to master
+	f6d26b1 HEAD@{10}: checkout: moving from master to master
+	f6d26b1 HEAD@{11}: commit: Added Micheal
 
-So long as the detached commits have not been "cleaned up".  These detached commits remain in the repository until the `git gc` command is run.
+  If you where to checkout that commit you will get a warning:
 
-Git offers many options for correcting mistakes and oversights as we work.  These will become more clear as you use them.  The important take away is that in most cases it is possible to undo essentially anything in Git if you do so early.  As with any other system, the longer you wait to try and correct something more more involved it is to correct.
+	git checkout 1b922e7
+	Note: checking out '1b922e7'.
+	
+	You are in 'detached HEAD' state. You can look around, make experimental
+	changes and commit them, and you can discard any commits you make in this
+	state without impacting any branches by performing another checkout.
+	
+	If you want to create a new branch to retain commits you create, you may
+	do so (now or later) by using -b with the checkout command again. Example:
+	
+	  git checkout -b new_branch_name
+	
+	HEAD is now at 1b922e7... It's a mistake
 
-Now that there is something worth sharing, we will look at how we go about [sharing our changes with others](/pages/sharing-with-others.html).
+  This sounds more severe than it actually is.  This is Git's way of telling you that you are not at the head of a branch.  Remember that each branch has a tag called head that points to the tip.  Since we moved the head tag of this branch (master) back one commit, this commit is not the head.  There are other commands in Git that will leave you in a detached head state.  This is fine if you are looking at the state of things in your repository.  You can even make changes here, but it will be more challenging to get back to these changes because you are not on a branch.  So if you checkout master, you will not be on this commit, but the one before it.  If you want to continue working with this commit, you can assign a branch to it using the syntax Git shared with you:
 
-TODO Need to work in the idea of rewriting history, but not changing it.
+	git checkout -b new_branch_name
+
+  So we see that even when you are editing the repository, Git is not really rewriting history, but adding new commits or moving branch tags around.  Git offers many options for correcting mistakes and oversights as we work.  These will become more clear as you use them.  The main take away is that it is essentially always possible to undo the things you do in Git.
+
+Now that we understand working in Git, we will look at how we go about [sharing our changes with others](/pages/sharing-with-others.html).
 

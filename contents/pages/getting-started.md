@@ -11,13 +11,13 @@ Before we get started we need to introduce ourselves to Git.  This is important 
 
 Git has a configuration where it tracks things like who you (the user) are.  You can modify this configuration using the <code>git config</code> commands.
 
-	git config user.name Me Myself
-	git config user.email me.myself@example.com
+	git config user.name Fred Foyle
+	git config user.email fred.foyle@example.com
 
 These commands will identify who you are to Git.  They will store this information in the current repository which may be fine.  If you don't want to have to keep entring this information for each repository however you can run the commands with the global flag:
 
-	git config --global user.name Me Myself
-	git config --global user.email me.myself@example.com
+	git config --global user.name Fred Foyle
+	git config --global user.email fred.foyle@example.com
 
 Now Git will remmeber these settings for all repositories for you.  This is probably how you want to edit most of the config settings (globally) in most circumstances.  While we are editing the configuration we should tell Git what editor we want to use with Git.  This command looks like this:
 
