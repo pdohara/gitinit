@@ -22,7 +22,7 @@ order: 2
 	
 	    Initial commit
 	
-  Here git is telling us what commits it is tracking, when they occured, who did them and what the comment was.  This is good information, but the display is a little verbose.  As the number of commits increases we are going to have a real issue looking at more than a little of the history at a time.  Fortunately the log command allows for us to change the output:
+  Here git is telling us what commits it is tracking, when they occurred, who did them and what the comment was.  This is good information, but the display is a little verbose.  As the number of commits increases we are going to have a real issue looking at more than a little of the history at a time.  Fortunately the log command allows for us to change the output:
 
 	git log --decorate --graph --oneline --date-order
 	* f6d26b1 (HEAD, master) Added Micheal
@@ -43,7 +43,7 @@ TODO-Mac How do I specify colors here?
 
 	git hist
 
-  and get that formated log output.  Make sure you include the double quotes to the whole line is entered for the alias.  If you would prefer to edit the config file directly, you just need to open ~/.gitconfig.  On Windows this will be in your home folder (which depends on the version of Windows you are running).
+  And get that formated log output.  Make sure you include the double quotes to the whole line is entered for the alias.  If you would prefer to edit the config file directly, you just need to open ~/.gitconfig.  On Windows this will be in your home folder (which depends on the version of Windows you are running).
 
 	[user]
 	        name = Fred Foyle
@@ -57,7 +57,7 @@ TODO-Mac How do I specify colors here?
 	[merge]
 	        tool = vimdiff
 
-  This may be an easier way to edit your alias list.  You can build an alias of any command.  For instance some people prefer to type `co` rather than `checkout`.  The thing to remember is that you are entering the command line after git.  Some operatings systems also allow you to create an alias for commands.  This is a case of doing what makes the most sense for your environment.
+  This may be an easier way to edit your alias list.  You can build an alias of any command.  For instance some people prefer to type `co` rather than `checkout`.  The thing to remember is that you are entering the command line after git.  Some operating systems also allow you to create an alias for commands.  This is a case of doing what makes the most sense for your environment.
 
 ## Fixing Mistakes
 
@@ -73,7 +73,7 @@ TODO-Mac How do I specify colors here?
 	#
 	no changes added to commit (use "git add" and/or "git commit -a")
 
-  Here we see that only the Directory.txt file has changed.  It is always a good idea to look at the changes before we reset them so we know what we are losing.  If you are accusomed to other version control tools you might think we can get rid of the changes to this file by geting the master branch again.
+  Here we see that only the Directory.txt file has changed.  It is always a good idea to look at the changes before we reset them so we know what we are losing.  If you are accustomed to other version control tools you might think we can get rid of the changes to this file by getting the master branch again.
 
 	git checkout master
 	M	Directory.txt
@@ -84,7 +84,7 @@ TODO-Mac How do I specify colors here?
 	git checkout --force master
 	Already on 'master'
 
-  Now we are back to where we wanted to be.  What if we had added that file to the staging area, but not commited it yet?  Git has a command for clearing the staging area (index):
+  Now we are back to where we wanted to be.  What if we had added that file to the staging area, but not committed it yet?  Git has a command for clearing the staging area (index):
 
 	git reset
 	Unstaged changes after reset:
@@ -129,11 +129,11 @@ TODO-Mac How do I specify colors here?
 	* dfa5664 - Added Micheal (17 minutes ago) <Fred Foyle>
 	* 7576855 - Initial commit (15 hours ago) <Fred Foyle>
 
-  We have the three commits, and the last commit contains both the change to the Directory.txt file and the new file Cheryl.jpg.  But doesn't that mean we changed history?  Yes it does.  We'll talk about this a little more in a minute, but first let's get back to amending commits'.  Note that we did not specify which commit we wanted to amend.  That is because Git only allows you to amend that last commit.  This is good for those situations when you press enter on the commit command and then realize that you have forgotten that new file.  What do we do if we made a mistake a couple of commits ago?  If you made a change some time ago and it has become apeparant that it was a mistake you can revert that change using:
+  We have the three commits, and the last commit contains both the change to the Directory.txt file and the new file Cheryl.jpg.  But doesn't that mean we changed history?  Yes it does.  We'll talk about this a little more in a minute, but first let's get back to amending commits'.  Note that we did not specify which commit we wanted to amend.  That is because Git only allows you to amend that last commit.  This is good for those situations when you press enter on the commit command and then realize that you have forgotten that new file.  What do we do if we made a mistake a couple of commits ago?  If you made a change some time ago and it has become apparent that it was a mistake you can revert that change using:
 
 	git revert dfa5664
 
-  This command makes a new commit that undoes the changes that were made by commit dfa5664.  Note that since Git is storing the changes that were made (rather than the state of the files after the changes) it know what actions were taken and therefore what actions are needed to undo those changes.  The number (dfa5664) is a commit idenitfier.  It is the first 7 characters from the SHA1 hash.  The commit identifiers are a little scary at first.  The good news is that you do not have to type the whole SHA1 ID, just enough to make it unique.  You can also use a Tag inplace of a commit identifier in most commands.  You can also specify a commit relative to a tag.  Since this commit is one behind the HEAD tag (current pointer) you could use the command:
+  This command makes a new commit that undoes the changes that were made by commit dfa5664.  Note that since Git is storing the changes that were made (rather than the state of the files after the changes) it knows what actions were taken and therefore what actions are needed to undo those changes.  The number (dfa5664) is a commit identifier.  It is the first 7 characters from the SHA1 hash.  The commit identifiers are a little scary at first.  The good news is that you do not have to type the whole SHA1 ID, just enough to make it unique.  You can also use a Tag in place of a commit identifier in most commands.  You can also specify a commit relative to a tag.  Since this commit is one behind the HEAD tag (current pointer) you could use the command:
 
 	git revert HEAD~1
 
@@ -147,7 +147,7 @@ TODO-Mac How do I specify colors here?
 	=======
 	>>>>>>> parent of dfa5664... Added Micheal
 
-  From the line that starts with `<<<<<<<` to the line that starts with `=======` is one side of the conflict.  The other side of the conflict is from the line that starts with `=======` to the line that starts with `>>>>>>>`.  You can edit the file directly, removing these lines and making the way you want.  Alternately you can use most Diff/Merge tools to graphically resolve this conflict.  Note that Git did not commit this change because of the conflict, but if there hadn't been a conflict then Git would have commited the change.  If you want to run the command but not commit the result you can add the no-commit command line option:
+  From the line that starts with `<<<<<<<` to the line that starts with `=======` is one side of the conflict.  The other side of the conflict is from the line that starts with `=======` to the line that starts with `>>>>>>>`.  You can edit the file directly, removing these lines and making the way you want.  Alternately you can use most Diff/Merge tools to graphically resolve this conflict.  Note that Git did not commit this change because of the conflict, but if there hadn't been a conflict then Git would have committed the change.  If you want to run the command but not commit the result you can add the no-commit command line option:
 
 	git revert --no-commit HEAD~1
 
@@ -171,7 +171,7 @@ TODO-Mac How do I specify colors here?
 
     git reset dfa5664
 
-  or
+  Or
 
     git reset HEAD~1
 
@@ -191,8 +191,8 @@ After running this command the history will look like this:
 
 In addition to ones responsibilities there is also a question of time.  We are much more likely to care about the individual commits made last week then we are the ones made last year (or six years ago).
 
-Git allows a great deal of flexibility with history.  Both in deciding what eventually gets shared with others (See Working with Others later in this tutorial), as well as in correcting history.  The idea of changing history may seem odd or even dangerous.  There is a certain amount of risk is deciding to change the history in a local repository.  One should consider if this history has value to keep.  To do this you must think more like a Dev Lead or Release Manager than a Developer.  If you are considering removing a set of commits because you are embarrass by them you should seek a second opinion.  If you have tried something and it just did not work, then you may consider removing that history.  In the end Git is a tool and the decision is up to you.
-  There is another consideration about making changes to history.  We are going to learn about sharing our repository with others.  If you have shared your repository then it is almost always a bad idea to change history in that repository.  If you amend a commit, or reset changes that someone else has already based new commits on you will create a mess that will be difficult to resolve.  Git will warn you about commands that may cause difficulty on public commits, but it is up to you to decide.  the rule of thumb is if you can shared the commits don't change them.
+Git allows a great deal of flexibility with history.  Both in deciding what eventually gets shared with others (See Working with Others later in this tutorial), as well as in correcting history.  The idea of changing history may seem odd or even dangerous.  There is a certain amount of risk is deciding to change the history in a local repository.  One should consider if this history has value to keep.  To do this you must think more like a Dev Lead or Release Manager than a Developer.  If you are considering removing a set of commits because you are embarrassed by them you should seek a second opinion.  If you have tried something and it just did not work, then you may consider removing that history.  In the end Git is a tool and the decision is up to you.
+  There is another consideration about making changes to history.  We are going to learn about sharing our repository with others.  If you have shared your repository then it is almost always a bad idea to change history in that repository.  If you amend a commit, or reset changes that someone else has already based new commits on you will create a mess that will be difficult to resolve.  Git will warn you about commands that may cause difficulty on public commits, but it is up to you to decide.  The rule of thumb is if you can shared the commits don't change them.
 
 ## Are They Really Gone?
 
@@ -219,7 +219,7 @@ Git allows a great deal of flexibility with history.  Both in deciding what even
 	f6d26b1 HEAD@{10}: checkout: moving from master to master
 	f6d26b1 HEAD@{11}: commit: Added Micheal
 
-  If you where to checkout that commit you will get a warning:
+  If you were to checkout that commit you will get a warning:
 
 	git checkout 1b922e7
 	Note: checking out '1b922e7'.

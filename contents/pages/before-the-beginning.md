@@ -4,7 +4,7 @@ template: article.jade
 order: 0
 ----
 
-# Before the Begining
+# Before the Beginning
 
 There are a few things to cover before we start talking about Distributed Version Control with Git.  This tutorial is for programmers that have already decided to use version control.  If have not decided about version control you can take a look at these articles:
 
@@ -17,19 +17,19 @@ http://en.wikipedia.org/wiki/Revision_control
 
 ### Repository
 
-  All version control sysetms store their data somewhere.  For Git this is called the repository.  The repository is in a folder called `.git` in the root folder that holds your files.  This repository is not some sort of client data store like in SVN, but contains all the version data.  All of the commits (changes) of the files are stored here.
+  All version control systems store their data somewhere.  For Git this is called the repository.  The repository is in a folder called `.git` in the root folder that holds your files.  This repository is not some sort of client data store like in SVN, but contains all the version data.  All of the commits (changes) of the files are stored here.
 
 ### Commit
 
-  A commit is a set of changes to files.  Note that it may be a change to a single file, but more typically a commit will track changes to several files.  This is convienent because changes often involve changes to multiple files.  The Commit is sometimes called a changeset.  Since Git stores these locally it is very quick to commit.  We will talk more about this idea and how you should think about commiting changes.
+  A commit is a set of changes to files.  Note that it may be a change to a single file, but more typically a commit will track changes to several files.  This is convenient because changes often involve changes to multiple files.  The Commit is sometimes called a changeset.  Since Git stores these locally it is very quick to commit.  We will talk more about this idea and how you should think about committing changes.
 
 #### SHA1 The name of a Commit
 
-  Commits in Git are "named" by a SHA1 hash.  A hash is a mathmatical algorythm that produces a fixed output, generally unique number based on an input.  Essentially, Git reads the changes made in the commit and generates a 20 byte number from it.  Sometimes this is refered to as a digest or message digest.  What is important about the SHA1 hash is that it is essentially always unique no matter what machine it is generated on.  This means that two machines will almost never create the same SHA1 number.  This is important for a distributed system.
+  Commits in Git are "named" by a SHA1 hash.  A hash is a mathematical algorithm that produces a fixed output, generally unique number based on an input.  Essentially, Git reads the changes made in the commit and generates a 20 byte number from it.  Sometimes this is referred to as a digest or message digest.  What is important about the SHA1 hash is that it is essentially always unique no matter what machine it is generated on.  This means that two machines will almost never create the same SHA1 number.  This is important for a distributed system.
 
 ### Tags
 
-  Repositories also store Tags.  A tag is a pointer to one of the commits with the repository.  They can be used to remeber what commit was used to build a specific release for instance.  There is a special tag called HEAD that points to the current work.  This allows Git to easily find the current commit on the current branch.  Each branch has a special tag that points to the current tip, or Head of the branch.
+  Repositories also store Tags.  A tag is a pointer to one of the commits with the repository.  They can be used to remember what commit was used to build a specific release for instance.  There is a special tag called HEAD that points to the current work.  This allows Git to easily find the current commit on the current branch.  Each branch has a special tag that points to the current tip, or Head of the branch.
 
 ### Branch
 

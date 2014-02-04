@@ -14,12 +14,12 @@ Git has a configuration where it tracks things like who you (the user) are.  You
 	git config user.name Fred Foyle
 	git config user.email fred.foyle@example.com
 
-These commands will identify who you are to Git.  They will store this information in the current repository which may be fine.  If you don't want to have to keep entring this information for each repository however you can run the commands with the global flag:
+These commands will identify who you are to Git.  They will store this information in the current repository which may be fine.  If you don't want to have to keep entering this information for each repository however you can run the commands with the global flag:
 
 	git config --global user.name Fred Foyle
 	git config --global user.email fred.foyle@example.com
 
-Now Git will remmeber these settings for all repositories for you.  This is probably how you want to edit most of the config settings (globally) in most circumstances.  While we are editing the configuration we should tell Git what editor we want to use with Git.  This command looks like this:
+Now Git will remember these settings for all repositories for you.  This is probably how you want to edit most of the config settings (globally) in most circumstances.  While we are editing the configuration we should tell Git what editor we want to use with Git.  This command looks like this:
 
 	git config --system core.editor C:\Windows\notepad.exe
 
@@ -33,9 +33,9 @@ Note in this case we have updated the system configuration which will apply to a
 
 Now that Git is setup, let's add some files.
 
-	Git init
+	git init
 
-To start working we need a repository.  Git creates the repository when you run the `get init` command.  Git will create a folder called `.git`.  There is nothing in this folder you need to look at.  It is importand that this folder is being backed up somehow as all of the change history that is being tracked is in this folder.
+To start working we need a repository.  Git creates the repository when you run the `git init` command.  Git will create a folder called `.git`.  There is nothing in this folder you need to look at.  It is important that this folder is being backed up somehow as all of the change history that is being tracked is in this folder.
 
   So now that we have run `git init` we have a repository but there are no files in it.  Not very interesting.
 
@@ -71,7 +71,7 @@ Now that our list of files has been staged we can "look" at the list using the `
 
   A couple of things to note.  The `[master  7576855]` tells you that the commit was added to the master branch (more on branches later) and the commit has an ID of 7576855.  The ID will become important when we start [SharingWithOthers](/pages/sharing-with-others.html).  Note that the commit records all the changes, in this case both files.  Also note that though Git allows for adding binary files (like ffoyle.jpg) it will not track differences in binary files.
 
-  Now that we have a start our man fred decides to add his son to the directory.  After adding his son's name to the directory Fred copies a picture also.  Then if you run git status you will see something like this:
+  Now that we have a start our man Fred decides to add his son to the directory.  After adding his son's name to the directory Fred copies a picture also.  Then if you run git status you will see something like this:
 
 	# On branch master
 	# Changes not staged for commit:
@@ -119,5 +119,5 @@ Now that our list of files has been staged we can "look" at the list using the `
 
 	git add -i
 
-  Then follow the prompts.  Experience with other version control systems suggests that these are very small changes to be commiting.  With Git it is better to make many small commits.  We will learn later how these can be made more meaningful.  Also because these changes are committed to the repository on your machine no one else will see them until you are ready to share them.  Note that you do not have to plan for the files you wish to modify.  You just make changes and Git notices those changes, you stage them and then commit them.  If you are working on your own this is all the workflow that you need.  As with any endeavor you will make mistakes from time to time, so let's talk about [fixing mista<span style="text-decoration: line-through;">t</span>kes](/pages/fixing-mistakes.html).
+  Then follow the prompts.  Experience with other version control systems suggests that these are very small changes to be committing.  With Git it is better to make many small commits.  We will learn later how these can be made more meaningful.  Also because these changes are committed to the repository on your machine no one else will see them until you are ready to share them.  Note that you do not have to plan for the files you wish to modify.  You just make changes and Git notices those changes, you stage them and then commit them.  If you are working on your own this is all the workflow that you need.  As with any endeavor you will make mistakes from time to time, so let's talk about [fixing mista<span style="text-decoration: line-through;">t</span>kes](/pages/fixing-mistakes.html).
 

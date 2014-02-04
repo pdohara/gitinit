@@ -16,14 +16,14 @@ So far all of the work we have been doing has been on the `master` branch.  As w
 
     git checkout [branch name]
  
-Since this is a common workflow there is a shortcut version of this using only the checkout command: 
+Since this is a common Workflow there is a shortcut version of this using only the checkout command: 
 
     git checkout -b [branch name]
 
-So let's assume you are refactoring while others continue to develop on master.  To create a branch called refactor you issue the command `git checkout -b refactor`.  At this point your repository could look like this: 
+So let's assume you are refactoring while others continue to develop on master.  To create a branch called refactoring you issue the command `git checkout -b refactoring`.  At this point your repository could look like this: 
         
     7576855 --- dfa5664 --- 10a326c --- 68ca42e (master)(origin\master)
-                                         \ (refactor)
+                                         \ (refactoring)
         
 The `origin` server will look like this:
 
@@ -31,14 +31,14 @@ The `origin` server will look like this:
       
 Note that the branch will not show up on the `origin` server until we push it there.  So now you make some change and your repository looks like this: 
 
-    10a326c --- 68ca42e --- 3c07fd --- 4f7d6a (refactor)
+    10a326c --- 68ca42e --- 3c07fd --- 4f7d6a (refactoring)
                      \ (master)
 
 In the mean time your teammates have been working on the master branch so origin now looks like this:
         
     10a326c --- 68ca42e --- d17089 --- 32860a (master)
            
-You want to stay current with what they are doing so you fetch the changes using `git fetch`, but you are not ready to share your work so we are going to merge the changes into our refactor branch.
+You want to stay current with what they are doing so you fetch the changes using `git fetch`, but you are not ready to share your work so we are going to merge the changes into our refactoring branch.
 
     git merge master 
 
@@ -46,37 +46,37 @@ Now your local repository will look something like this:
 
     10a326c --- 68ca42e --- d17089 --- 32860a (master)
                  \                          \
-                  \ --- 3c07fd --- 4f7d6a --- 375a4d (refactor)
+                  \ --- 3c07fd --- 4f7d6a --- 375a4d (refactoring)
 
-You can (and probably should) push these changes to the remote.  You already know the command to push changes is `git push`, but in this case we also want Git to remember that our local refactor branch should push to the new refactor branch on origin.  So the command will look like this:
+You can (and probably should) push these changes to the remote.  You already know the command to push changes is `git push`, but in this case we also want Git to remember that our local refactoring branch should push to the new refactoring branch on origin.  So the command will look like this:
 
-    git push -u origin refactor
+    git push -u origin refactoring
 
-This will push the new refactor branch to origin and setup the local refactor branch to track it.  This makes the local refactor branch a tracking branch of the origin refactor branch:
+This will push the new refactoring branch to origin and setup the local refactoring branch to track it.  This makes the local refactoring branch a tracking branch of the origin refactoring branch:
 
     10a326c --- 68ca42e --- d17089 --- 32860a (master)(origin/master)
                  \                          \
-                  \ --- 3c07fd --- 4f7d6a --- 375a4d (refactor)(origin/refactor)
+                  \ --- 3c07fd --- 4f7d6a --- 375a4d (refactoring)(origin/refactoring)
 
-Now as you continue to work on the refactor branch you can use fetch and push without having to specify the remote branch you wish to fetch from or push to.  At some point you will be done with the work on the refactor branch.  Then you will want to merge the changes back to master.  Let's say that your repository looks like this:
+Now as you continue to work on the refactoring branch you can use fetch and push without having to specify the remote branch you wish to fetch from or push to.  At some point you will be done with the work on the refactoring branch.  Then you will want to merge the changes back to master.  Let's say that your repository looks like this:
 
     10a326c --- 68ca42e --- d17089 --- 32860a -- 3f450a (master)(origin/master)
                  \                          \
-                  \ --- 3c07fd --- 4f7d6a --- 375a4d --- 3f670a --- 4d2a3c (refactor)(origin/refactor)
+                  \ --- 3c07fd --- 4f7d6a --- 375a4d --- 3f670a --- 4d2a3c (refactoring)(origin/refactoring)
 
 To merge the changes to the master branch you will checkout the master branch and then merge:
 
     git checkout master
-    git merge refactor
+    git merge refactoring
 
 After resolving and conflicts your repository will look like this:
 
                                                    /(origin/master)
     10a326c --- 68ca42e --- d17089 --- 32860a -- 3f450a ----------------- 276a54 (master)
                  \                          \                           /
-                  \ --- 3c07fd --- 4f7d6a --- 375a4d --- 3f670a --- 4d2a3c (refactor)(origin/refactor)
+                  \ --- 3c07fd --- 4f7d6a --- 375a4d --- 3f670a --- 4d2a3c (refactoring)(origin/refactoring)
 
-  Now you are ready to puch the changes to share with the rest of your team.
+  Now you are ready to push the changes to share with the rest of your team.
 
 ### Merging vs. Rebasing
 
@@ -85,17 +85,17 @@ In the previous section we used the `git rebase` command to combine the changes 
     9227e1 --- ca8249 --- ca93a4 --- 495254 (master)
                     \ --- 390b06 --- 181df7 (origin/master)
 
-becomes this:
+Becomes this:
 
     9227e1 --- ca8249 --- ca93a4 --- 495254 --- f62e30 --- a993fe (master)(origin/master)
 
-On the other hand When we where working on on the refactor branch we want that to show as a branch of development se we used the merge command:
+On the other hand When we where working on on the refactoring branch we want that to show as a branch of development so we used the merge command:
 
     10a326c --- 68ca42e --- d17089 --- 32860a -- 3f450a ----------------- 276a54 (master)(origin/master)
                  \                          \                           /
-                  \ --- 3c07fd --- 4f7d6a --- 375a4d --- 3f670a --- 4d2a3c (refactor)(origin/refactor)
+                  \ --- 3c07fd --- 4f7d6a --- 375a4d --- 3f670a --- 4d2a3c (refactoring)(origin/refactoring)
 
-The choice of merge vs. rebase is a choice of how the repository will be structured when we are done.  So you will typically use rebase to work on a branch and merge to bring branches back together.
+The choice of merge vs. Rebase is a choice of how the repository will be structured when we are done.  So you will typically use rebase to work on a branch and merge to bring branches back together.
 
 ##Review
 

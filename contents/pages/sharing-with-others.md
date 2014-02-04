@@ -6,13 +6,13 @@ order: 3
 
 ### Distributed Storage
  
- Git allow for more than a single repository.  There can be a central machine that everyone shares their changes with, or you can setup a machine for each team to work with. Then team lead decides what changes should go to the project repository and be built with all the other teams work.  In this case a team can choose to pull changes from another team repositories (directly, not through the project server).  Perhaps to ensure that a difficult merge is given the time required to get it right.  There are many organizations or repositories that are possible with a DVCS.  This also means that there are new commands used by a DVCS and that it takes some time to become accustome to how this new tool works.
+ Git allows for more than a single repository.  There can be a central machine that everyone shares their changes with, or you can setup a machine for each team to work with. Then team lead decides what changes should go to the project repository and be built with all the other teams work.  In this case a team can choose to pull changes from another team repositories (directly, not through the project server).  Perhaps to ensure that a difficult merge is given the time required to get it right.  There are many organizations or repositories that are possible with a DVCS.  This also means that there are new commands used by a DVCS and that it takes some time to become accustom to how this new tool works.
 
   Before you can share with others, you need to decide where you will be sharing.  Everything that has been done up to this point in the tutorial has happened on a single machine.  The commits that we have been doing have been recorded to the repository on the local machine.  The good part of this is that commits are very fast and we can do them when we do not have access to a "server".  This means that you can commit changes at your local coffee shop, or on an airplane.  The other side of it is that a commit does not save the information to another machine.  To share the information and therefore back it up we need a remote to work with.  Git needs to be able to accomplish file actions with the remote.
 
 ### Git Server Options
 
-Git offers many [options for setting up a server](http://git-scm.com/book/en/Git-on-the-Server-The-Protocols).  As with any server technology these options can be complex and involve decitions relating to security and network performance.  As such, I would recomend using a service like [GitHub](https://github.com/).  This frees you from having to learn about deployment options and server setup.  Alternately you may have a Git server that has already been setup by your employer or someone else on your team.  Obviously in this case you will use that server.  If you are determined to setup your own server, I recomend getting a package like [GitHub for Windows](http://windows.github.com/) or [Bonobo](http://bonobogitserver.com/).  For these examples I will work with a file system based remote.
+Git offers many [options for setting up a server](http://git-scm.com/book/en/Git-on-the-Server-The-Protocols).  As with any server technology these options can be complex and involve decisions relating to security and network performance.  As such, I would recommend using a service like [GitHub](https://github.com/).  This frees you from having to learn about deployment options and server setup.  Alternately you may have a Git server that has already been setup by your employer or someone else on your team.  Obviously in this case you will use that server.  If you are determined to setup your own server, I recommend getting a package like [GitHub for Windows](http://windows.github.com/) or [Bonobo](http://bonobogitserver.com/).  For these examples I will work with a file system based remote.
 
 ### Working with Remotes
 
@@ -22,7 +22,7 @@ Git offers many [options for setting up a server](http://git-scm.com/book/en/Git
 
   Note that the clone command takes a URL.  This can be http based like for GitHub.  It can be file based as in our example.  It may use ssh if you are using ssh for authentication to the shared repository.  Who ever setup the repository for you should be able to give you the appropriate URL to use to clone the repository.
        
-  Now that Micheal has a clone of the repository he has decied to do something easy to make sure things are working.  So he adds his mother (Sara Jane) to the repository and adds a picture of her.
+  Now that Micheal has a clone of the repository he has decided to do something easy to make sure things are working.  So he adds his mother (Sara Jane) to the repository and adds a picture of her.
 
 	git status
 	# On branch master
@@ -88,7 +88,7 @@ Git offers many [options for setting up a server](http://git-scm.com/book/en/Git
 	* dfa5664 - Added Micheal (5 hours ago) <Fred Foyle>
 	* 7576855 - Initial commit (20 hours ago) <Fred Foyle>
 
-  So where are the changes we just fetched?  They don't show up in this history. Git has them in a in the FETCH_HEAD.  You can see them by pulling the log on that:
+  So where are the changes we just fetched?  They don't show up in this history. Git has them in the FETCH_HEAD.  You can see them by pulling the log on that:
 
 	git log FETCH_HEAD --not master
 	commit 68ca42e8c0a23b746c1d67bcca46acc70d6c129f
@@ -142,7 +142,7 @@ Git offers many [options for setting up a server](http://git-scm.com/book/en/Git
 	git rebase --continue
 	Applying: Added Mom
 
-  As we can see, Git has commited the changes from the origin/master branch.  We can see this in the history:
+  As we can see, Git has committed the changes from the origin/master branch.  We can see this in the history:
 
 	git hist
 	* 2f2f89b - (HEAD, master) Added Mom (6 minutes ago) <Micheal Foyle>
@@ -166,7 +166,7 @@ Git offers many [options for setting up a server](http://git-scm.com/book/en/Git
 
 	git pull --rebase
 
-  `git pull` without the --rebase option is like issuing a `git fetch` followed by a `git merge`.  Though this will work you will find most shops use rebase for work on the same branch.  Merging is used for bringing branches back together.  This command is convienent, but I have found that I prefer doing it in two steps.  I don't have a compelling reason why, I just prefer it that way.
+  `git pull` without the --rebase option is like issuing a `git fetch` followed by a `git merge`.  Though this will work you will find most shops use rebase for work on the same branch.  Merging is used for bringing branches back together.  This command is convenient, but I have found that I prefer doing it in two steps.  I don't have a compelling reason why, I just prefer it that way.
         
 ### Don't Cross the Streams
         
