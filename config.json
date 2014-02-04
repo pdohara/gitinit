@@ -1,5 +1,5 @@
 {
-  "output" : "../build/",
+  "output" : "./_generated/",
   "locals": {
     "url": "http://localhost:8080",
     "name": "Gitin' It",
