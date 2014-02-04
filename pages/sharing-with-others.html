@@ -39,15 +39,15 @@
       <div class="content-wrap">
         <article class="article">
           <section class="content"><h3 id="distributed-storage">Distributed&nbsp;Storage</h3>
-<p> Git allow for more than a single repository.  There can be a central machine that everyone shares their changes with, or you can setup a machine for each team to work with. Then team lead decides what changes should go to the project repository and be built with all the other teams work.  In this case a team can choose to pull changes from another team repositories (directly, not through the project server).  Perhaps to ensure that a difficult merge is given the time required to get it right.  There are many organizations or repositories that are possible with a <span class="caps">DVCS</span>.  This also means that there are new commands used by a DVCS and that it takes some time to become accustome to how this new tool&nbsp;works.</p>
+<p> Git allows for more than a single repository.  There can be a central machine that everyone shares their changes with, or you can setup a machine for each team to work with. Then team lead decides what changes should go to the project repository and be built with all the other teams work.  In this case a team can choose to pull changes from another team repositories (directly, not through the project server).  Perhaps to ensure that a difficult merge is given the time required to get it right.  There are many organizations or repositories that are possible with a <span class="caps">DVCS</span>.  This also means that there are new commands used by a DVCS and that it takes some time to become accustom to how this new tool&nbsp;works.</p>
 <p>  Before you can share with others, you need to decide where you will be sharing.  Everything that has been done up to this point in the tutorial has happened on a single machine.  The commits that we have been doing have been recorded to the repository on the local machine.  The good part of this is that commits are very fast and we can do them when we do not have access to a “server”.  This means that you can commit changes at your local coffee shop, or on an airplane.  The other side of it is that a commit does not save the information to another machine.  To share the information and therefore back it up we need a remote to work with.  Git needs to be able to accomplish file actions with the&nbsp;remote.</p>
 <h3 id="git-server-options">Git Server&nbsp;Options</h3>
-<p>Git offers many <a href="http://git-scm.com/book/en/Git-on-the-Server-The-Protocols">options for setting up a server</a>.  As with any server technology these options can be complex and involve decitions relating to security and network performance.  As such, I would recomend using a service like <a href="https://github.com/">GitHub</a>.  This frees you from having to learn about deployment options and server setup.  Alternately you may have a Git server that has already been setup by your employer or someone else on your team.  Obviously in this case you will use that server.  If you are determined to setup your own server, I recomend getting a package like <a href="http://windows.github.com/">GitHub for Windows</a> or <a href="http://bonobogitserver.com/">Bonobo</a>.  For these examples I will work with a file system based&nbsp;remote.</p>
+<p>Git offers many <a href="http://git-scm.com/book/en/Git-on-the-Server-The-Protocols">options for setting up a server</a>.  As with any server technology these options can be complex and involve decisions relating to security and network performance.  As such, I would recommend using a service like <a href="https://github.com/">GitHub</a>.  This frees you from having to learn about deployment options and server setup.  Alternately you may have a Git server that has already been setup by your employer or someone else on your team.  Obviously in this case you will use that server.  If you are determined to setup your own server, I recommend getting a package like <a href="http://windows.github.com/">GitHub for Windows</a> or <a href="http://bonobogitserver.com/">Bonobo</a>.  For these examples I will work with a file system based&nbsp;remote.</p>
 <h3 id="working-with-remotes">Working with&nbsp;Remotes</h3>
 <p>  After the mess that Micheal made when changing the Directory.txt file with a script, Fred has decided he needs to work on it from Micheal’s own machine.  Since the repository is on a network file share Micheal can get his own copy of it by cloning&nbsp;it:</p>
-<pre><code>git clone file://HomeServer/Directory</code></pre>
-<p>  Note that the clone command takes a <span class="caps">URL</span>.  This can be http based like for GitHub.  It can be file based as in our example.  It may use ssh if you are using ssh for authentication to the shared repository.  Who ever setup the repository for you should be able to give you the appropriate URL to use to clone the&nbsp;repository.</p>
-<p>  Now that Micheal has a clone of the repository he has decied to do something easy to make sure things are working.  So he adds his mother (Sara Jane) to the repository and adds a picture of&nbsp;her.</p>
+<pre><code>git clone file://HomeServer/Directory
+</code></pre><p>  Note that the clone command takes a <span class="caps">URL</span>.  This can be http based like for GitHub.  It can be file based as in our example.  It may use ssh if you are using ssh for authentication to the shared repository.  Who ever setup the repository for you should be able to give you the appropriate URL to use to clone the&nbsp;repository.</p>
+<p>  Now that Micheal has a clone of the repository he has decided to do something easy to make sure things are working.  So he adds his mother (Sara Jane) to the repository and adds a picture of&nbsp;her.</p>
 <pre><code>git status
 # On branch master
 # Changes to be committed:
@@ -65,8 +65,8 @@ git hist
 * efa1565 - (HEAD, master) Added Mom (38 seconds ago) &lt;Micheal Foyle&gt;
 * 10a326c - (origin/master) Added Cheryl (3 hours ago) &lt;Fred Foyle&gt;
 * dfa5664 - Added Micheal (4 hours ago) &lt;Fred Foyle&gt;
-* 7576855 - Initial commit (19 hours ago) &lt;Fred Foyle&gt;</code></pre>
-<p>  Meanwhile Fred has added his college buddy Jorge Ringenbach to the&nbsp;directory:</p>
+* 7576855 - Initial commit (19 hours ago) &lt;Fred Foyle&gt;
+</code></pre><p>  Meanwhile Fred has added his college buddy Jorge Ringenbach to the&nbsp;directory:</p>
 <pre><code>git add Directory.txt 
 git add ringenbach.jpg 
 git commit -m &quot;Added Jorge&quot;
@@ -78,16 +78,16 @@ git hist
 * 1b922e7 - It&#39;s a mistake (59 minutes ago) &lt;Fred Foyle&gt;
 * 10a326c - (master) Added Cheryl (4 hours ago) &lt;Fred Foyle&gt;
 * dfa5664 - Added Micheal (4 hours ago) &lt;Fred Foyle&gt;
-* 7576855 - Initial commit (19 hours ago) &lt;Fred Foyle&gt;</code></pre>
-<p>  Now before Micheal can share his changes with his dad, he needs to make sure he is up to date.  To do that he needs to get any new changes his dad has made.  So he fetches them&nbsp;with:</p>
+* 7576855 - Initial commit (19 hours ago) &lt;Fred Foyle&gt;
+</code></pre><p>  Now before Micheal can share his changes with his dad, he needs to make sure he is up to date.  To do that he needs to get any new changes his dad has made.  So he fetches them&nbsp;with:</p>
 <pre><code>git fetch
 remote: Counting objects: 4, done.
 remote: Compressing objects: 100% (3/3), done.
 remote: Total 3 (delta 1), reused 0 (delta 0)
 Unpacking objects: 100% (3/3), done.
 From /Users/pdohara/Source/mDir/../Directory
-   10a326c..7fe443a  master     -&gt; origin/master</code></pre>
-<p>  This command requests any changes from the origin repository.  Though this retrieves any commits that are on the remote server, but not on yours, it does not resolve the two different lines of development nor does it update any of your working files.  Before we can get around to that we need to understand the options for merging these&nbsp;changes.</p>
+   10a326c..7fe443a  master     -&gt; origin/master
+</code></pre><p>  This command requests any changes from the origin repository.  Though this retrieves any commits that are on the remote server, but not on yours, it does not resolve the two different lines of development nor does it update any of your working files.  Before we can get around to that we need to understand the options for merging these&nbsp;changes.</p>
 <h3 id="distributed-development-reality">Distributed Development&nbsp;Reality</h3>
 <p>  When you are working on the <code>master</code> branch on your local machine, it is likely that other people are pushing changes to the remote repository <code>master</code> branch.  One way to think of this is as if there were two branches.  Development on two different branches needs be merged.  This results in a history graph that looks like&nbsp;this:</p>
 <p><img src="../pages/Merge.png" alt="Merge Example" title="Merge Example"></p>
@@ -98,15 +98,15 @@ From /Users/pdohara/Source/mDir/../Directory
 * efa1565 - (HEAD, master) Added Mom (2 hours ago) &lt;Micheal Foyle&gt;
 * 10a326c - Added Cheryl (5 hours ago) &lt;Fred Foyle&gt;
 * dfa5664 - Added Micheal (5 hours ago) &lt;Fred Foyle&gt;
-* 7576855 - Initial commit (20 hours ago) &lt;Fred Foyle&gt;</code></pre>
-<p>  So where are the changes we just fetched?  They don’t show up in this history. Git has them in a in the FETCH_HEAD.  You can see them by pulling the log on&nbsp;that:</p>
+* 7576855 - Initial commit (20 hours ago) &lt;Fred Foyle&gt;
+</code></pre><p>  So where are the changes we just fetched?  They don’t show up in this history. Git has them in the FETCH_HEAD.  You can see them by pulling the log on&nbsp;that:</p>
 <pre><code>git log FETCH_HEAD --not master
 commit 68ca42e8c0a23b746c1d67bcca46acc70d6c129f
 Author: Patrick O&#39;Hara &lt;pdohara@smallwarz.org&gt;
 Date:   Sun Feb 2 15:24:00 2014 -0600
 
-    Added Jorge</code></pre>
-<p>  Now that we know what we are going to rebase, we can go&nbsp;ahead.  </p>
+    Added Jorge
+</code></pre><p>  Now that we know what we are going to rebase, we can go&nbsp;ahead.  </p>
 <pre><code>git rebase
 First, rewinding head to replay your work on top of it...
 Applying: Added Mom
@@ -122,8 +122,8 @@ The copy of the patch that failed is found in:
 
 When you have resolved this problem, run &quot;git rebase --continue&quot;.
 If you prefer to skip this patch, run &quot;git rebase --skip&quot; instead.
-To check out the original branch and stop rebasing, run &quot;git rebase --abort&quot;.</code></pre>
-<p>  So Git has identified that there are two changes to the Directory.txt file and we need to sort it out.  The decorated version of the file looks like&nbsp;this:</p>
+To check out the original branch and stop rebasing, run &quot;git rebase --abort&quot;.
+</code></pre><p>  So Git has identified that there are two changes to the Directory.txt file and we need to sort it out.  The decorated version of the file looks like&nbsp;this:</p>
 <pre><code>Fred Foyle,415-555-3467,ffoyle.jpg
 Micheal Foyle,415-555-3467,MichealF.jpg
 Cheryl Motague,413-555-8725,Cheryl.jpg
@@ -131,25 +131,25 @@ Cheryl Motague,413-555-8725,Cheryl.jpg
 Jorge Ringenbach,414-555-0251,ringenbach.jpg
 =======
 Sara Jane Foyle,415-555-3476,SaraJane.jpg
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; Added Mom</code></pre>
-<p>  After the merge the file will look like&nbsp;this:</p>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; Added Mom
+</code></pre><p>  After the merge the file will look like&nbsp;this:</p>
 <pre><code>Fred Foyle,415-555-3467,ffoyle.jpg
 Micheal Foyle,415-555-3467,MichealF.jpg
 Cheryl Motague,413-555-8725,Cheryl.jpg
 Sara Jane Foyle,415-555-3476,SaraJane.jpg
-Jorge Ringenbach,414-555-0251,ringenbach.jpg</code></pre>
-<p>  Now we can continue the&nbsp;rebase.</p>
+Jorge Ringenbach,414-555-0251,ringenbach.jpg
+</code></pre><p>  Now we can continue the&nbsp;rebase.</p>
 <pre><code>git add Directory.txt 
 git rebase --continue
-Applying: Added Mom</code></pre>
-<p>  As we can see, Git has commited the changes from the origin/master branch.  We can see this in the&nbsp;history:</p>
+Applying: Added Mom
+</code></pre><p>  As we can see, Git has committed the changes from the origin/master branch.  We can see this in the&nbsp;history:</p>
 <pre><code>git hist
 * 2f2f89b - (HEAD, master) Added Mom (6 minutes ago) &lt;Micheal Foyle&gt;
 * 68ca42e - (origin/master) Added Jorge (71 minutes ago) &lt;Fred Foyle&gt;
 * 10a326c - Added Cheryl (6 hours ago) &lt;Fred Foyle&gt;
 * dfa5664 - Added Micheal (6 hours ago) &lt;Fred Foyle&gt;
-* 7576855 - Initial commit (21 hours ago) &lt;Fred Foyle&gt;</code></pre>
-<p>  Note that the origin/master branch is one commit behind our local master branch.  That is because we have yet to push our&nbsp;changes.</p>
+* 7576855 - Initial commit (21 hours ago) &lt;Fred Foyle&gt;
+</code></pre><p>  Note that the origin/master branch is one commit behind our local master branch.  That is because we have yet to push our&nbsp;changes.</p>
 <pre><code>git push 
 Counting objects: 6, done.
 Delta compression using up to 4 threads.
@@ -157,25 +157,25 @@ Compressing objects: 100% (4/4), done.
 Writing objects: 100% (4/4), 170.00 KiB | 0 bytes/s, done.
 Total 4 (delta 2), reused 0 (delta 0)
 To /Users/pdohara/Source/mDir/../Directory
-   68ca42e..2f2f89b  master -&gt; master</code></pre>
-<p>  Now the origin repository also has the changes.  Git provides a command to do both the fetch and rebase (or merge) at&nbsp;once.</p>
-<pre><code>git pull --rebase</code></pre>
-<p>  <code>git pull</code> without the —rebase option is like issuing a <code>git fetch</code> followed by a <code>git merge</code>.  Though this will work you will find most shops use rebase for work on the same branch.  Merging is used for bringing branches back together.  This command is convienent, but I have found that I prefer doing it in two steps.  I don’t have a compelling reason why, I just prefer it that&nbsp;way.</p>
+   68ca42e..2f2f89b  master -&gt; master
+</code></pre><p>  Now the origin repository also has the changes.  Git provides a command to do both the fetch and rebase (or merge) at&nbsp;once.</p>
+<pre><code>git pull --rebase
+</code></pre><p>  <code>git pull</code> without the —rebase option is like issuing a <code>git fetch</code> followed by a <code>git merge</code>.  Though this will work you will find most shops use rebase for work on the same branch.  Merging is used for bringing branches back together.  This command is convenient, but I have found that I prefer doing it in two steps.  I don’t have a compelling reason why, I just prefer it that&nbsp;way.</p>
 <h3 id="don-t-cross-the-streams">Don’t Cross the&nbsp;Streams</h3>
 <p>Merging and Rebasing work fine together as long as you don’t use both commands on the same commits.  If you look back through our history listing you will see that the “Added Mom” commit is different after the rebase.  Before the&nbsp;rebase:</p>
 <pre><code>git hist
 * efa1565 - (HEAD, master) Added Mom (2 hours ago) &lt;Micheal Foyle&gt;
 * 10a326c - Added Cheryl (5 hours ago) &lt;Fred Foyle&gt;
 * dfa5664 - Added Micheal (5 hours ago) &lt;Fred Foyle&gt;
-* 7576855 - Initial commit (20 hours ago) &lt;Fred Foyle&gt;</code></pre>
-<p>  And&nbsp;After:</p>
+* 7576855 - Initial commit (20 hours ago) &lt;Fred Foyle&gt;
+</code></pre><p>  And&nbsp;After:</p>
 <pre><code>git hist
 * 2f2f89b - (HEAD, master) Added Mom (6 minutes ago) &lt;Micheal Foyle&gt;
 * 68ca42e - (origin/master) Added Jorge (71 minutes ago) &lt;Fred Foyle&gt;
 * 10a326c - Added Cheryl (6 hours ago) &lt;Fred Foyle&gt;
 * dfa5664 - Added Micheal (6 hours ago) &lt;Fred Foyle&gt;
-* 7576855 - Initial commit (21 hours ago) &lt;Fred Foyle&gt;</code></pre>
-<p>  This is another case of Git changing history.  Since the commit <span class="caps">SHA1</span> has changed, Git has to assume that it is a different change.As a result someone will get another conflict.  If a few changes are both rebased and merged it can result in quite a&nbsp;mess.</p>
+* 7576855 - Initial commit (21 hours ago) &lt;Fred Foyle&gt;
+</code></pre><p>  This is another case of Git changing history.  Since the commit <span class="caps">SHA1</span> has changed, Git has to assume that it is a different change.As a result someone will get another conflict.  If a few changes are both rebased and merged it can result in quite a&nbsp;mess.</p>
 <h3 id="who-s-the-master-">Who’s the&nbsp;Master?</h3>
 <p>  <code>master</code> is the name of the trunk or main branch in a repository.  If no other branches are created, then all work will be on the <code>master</code> branch.  We’ll talk more about branches in the next section.  The names of the branches (master) and (origin/master) represent two different branches in your local repository.  The master branch is the local trunk of your repository.  The origin/master branch is a <strong>tracking branch</strong> of the remote (origin) master branch.  So when you fetch changes from the remote they go on this branch.  Tracking branches are important for working with remotes.  We’ll talk about them more in the next&nbsp;section.</p>
 <h3 id="where-were-we-">Where Were&nbsp;We?</h3>
