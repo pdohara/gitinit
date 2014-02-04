@@ -5,5 +5,5 @@ This site is was created to help people to understand distributed version contro
 
   Let's get started understanding distributed version control with Git.
 
-  [Before the Beginning](./before-the-beginning.html)
+  [Before the Beginning](pages/before-the-beginning.html)
 

@@ -4,8 +4,6 @@ template: article.jade
 order: 0
 ----
 
-# Before the Beginning
-
 There are a few things to cover before we start talking about Distributed Version Control with Git.  This tutorial is for programmers that have already decided to use version control.  If have not decided about version control you can take a look at these articles:
 
 https://www.atlassian.com/dvcs/overview/what-is-version-control
