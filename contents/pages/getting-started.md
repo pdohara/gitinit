@@ -86,8 +86,9 @@ Now that our list of files has been staged we can "look" at the list using the `
 	#	MichealF.jpg
 	no changes added to commit (use "git add" and/or "git commit -a")
 
-  See that git reminds you that you will need to add the new file.  So let's do that:
+  See that git reminds you that you will need to add the files.  So let's do that:
 
+	git add Directory.txt
 	git add MichealF.jpg
 
   Now `git status` shows that the files are both in the index.
@@ -97,11 +98,6 @@ Now that our list of files has been staged we can "look" at the list using the `
 	#   (use "git reset HEAD <file>..." to unstage)
 	#
 	#	new file:   MichealF.jpg
-	#
-	# Changes not staged for commit:
-	#   (use "git add <file>..." to update what will be committed)
-	#   (use "git checkout -- <file>..." to discard changes in working directory)
-	#
 	#	modified:   Directory.txt
 	#
 

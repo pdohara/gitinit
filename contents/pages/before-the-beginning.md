@@ -19,7 +19,7 @@ http://en.wikipedia.org/wiki/Revision_control
 
 ### Commit
 
-  A commit is a set of changes to files.  Note that it may be a change to a single file, but more typically a commit will track changes to several files.  This is convenient because changes often involve changes to multiple files.  The Commit is sometimes called a changeset.  Since Git stores these locally it is very quick to commit.  We will talk more about this idea and how you should think about committing changes.
+  A commit is a set of changes to files.  Note that it may be a change to a single file, but more typically a commit will track changes to several files.  This is convenient because changes often involve multiple files.  The Commit is sometimes called a changeset.  Since Git stores these locally it is very quick to commit.  We will talk more about this idea and how you should think about committing changes.
 
 #### SHA1 The name of a Commit
 

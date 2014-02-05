@@ -97,25 +97,5 @@ On the other hand When we where working on on the refactoring branch we want tha
 
 The choice of merge vs. Rebase is a choice of how the repository will be structured when we are done.  So you will typically use rebase to work on a branch and merge to bring branches back together.
 
-##Review
-
-So let's look at the commands we've learned about for interacting with Git:
-
-To Start:
-- `git clone [URL]`
-
-While Working Locally:
-- `git add`
-- `git commit`
-
-To Share with Other Repositories:
-- `git fetch`
-- `git rebase`
-- `git push`
-
-Working on Branches:
-- `git branch`
-- `git checkout`
-
-After going through the set of Git command a couple of times you will start to become comfortable with them.  Obviously this is not all that there is to know about Git.  Please consider what you're [next steps](/pages/next-steps.html) with Git may be.
+That gives you what you need to know to work with Git.
 

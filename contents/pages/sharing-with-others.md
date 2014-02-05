@@ -73,12 +73,23 @@ Git offers many [options for setting up a server](http://git-scm.com/book/en/Git
 ### Distributed Development Reality
 
   When you are working on the `master` branch on your local machine, it is likely that other people are pushing changes to the remote repository `master` branch.  One way to think of this is as if there were two branches.  Development on two different branches needs be merged.  This results in a history graph that looks like this:
-        
-![Merge Example](./Merge.png "Merge Example")
+
+  * 4ffd7cd - (HEAD, origin/master, origin/HEAD, master) Working on Sharing page
+  *   0c65b8c - Merge remote-tracking branch 'origin/master' (6 weeks ago) <Patric
+  |\
+  | * 675ddb4 - Described the purpose of this site. (6 weeks ago) <Patrick O'Hara>
+  | * fa047ea - Initial commit (6 weeks ago) <Patrick O'Hara>
 
   If we actually had multiple branches, that would be fine, but we are working on the same branch.  So we need a new method of getting two different lines of development aligned.  For Git the command is `rebase`.  This takes the commits you have made to your local `master` branch and apply them to the remote `master` branch.  This leads to a linear history like this:
         
-![Rebase Example](./Rebase.png "Rebase Example")
+  * c862d02 - (HEAD, origin/master, origin/HEAD, master) Update current revision f
+  * 5b9504a - Fix relative link on index page, adjust title on page. (30 hours ago
+  * 0d27a0c - Switch sub-repo to gh-pages (30 hours ago) <Mackenzie Zastrow>
+  * c35bf69 - Have wintersmith dump generated output to sub-repo. (30 hours ago) <
+  * b14febb - Add sub-module for generated code (30 hours ago) <Mackenzie Zastrow>
+  * e07f9bf - Rewrote the Index.  Ran the spell checker over all the pages. (31 ho
+  * 17f0d91 - Fixing unintended Rebase. (2 days ago) <Patrick O'Hara>
+  * d5f1b34 - Template commit (3 days ago) <Patrick O'Hara>
 
   Before we rebase these changes we want to have a look at them.  So we try our hist alias:
 

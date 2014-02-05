@@ -189,10 +189,10 @@ After running this command the history will look like this:
   - **Dev Lead** Track the state of different features.
   - **Release Manager** Track features that make up a release and releases.
 
-In addition to ones responsibilities there is also a question of time.  We are much more likely to care about the individual commits made last week then we are the ones made last year (or six years ago).
+In addition to ones responsibilities there is also a question of time.  We are much more likely to care about the individual commits made last week then we are the ones made last year.
 
-Git allows a great deal of flexibility with history.  Both in deciding what eventually gets shared with others (See Working with Others later in this tutorial), as well as in correcting history.  The idea of changing history may seem odd or even dangerous.  There is a certain amount of risk is deciding to change the history in a local repository.  One should consider if this history has value to keep.  To do this you must think more like a Dev Lead or Release Manager than a Developer.  If you are considering removing a set of commits because you are embarrassed by them you should seek a second opinion.  If you have tried something and it just did not work, then you may consider removing that history.  In the end Git is a tool and the decision is up to you.
-  There is another consideration about making changes to history.  We are going to learn about sharing our repository with others.  If you have shared your repository then it is almost always a bad idea to change history in that repository.  If you amend a commit, or reset changes that someone else has already based new commits on you will create a mess that will be difficult to resolve.  Git will warn you about commands that may cause difficulty on public commits, but it is up to you to decide.  The rule of thumb is if you can shared the commits don't change them.
+Git allows a great deal of flexibility with history.  Both in deciding what eventually gets shared with others (See Working with Others later in this tutorial), as well as in correcting history.  The idea of changing history may seem odd or even dangerous.  There is a certain amount of risk in deciding to change the history in a local repository.  One should consider if this history has value.  To do this you must think more like a Dev Lead or Release Manager than a Developer.  If you are considering removing a set of commits because you are embarrassed by them you should seek a second opinion.  If you have tried something and it just did not work, then you may consider removing that history.  In the end Git is a tool and the decision is up to you.
+  There is another consideration about making changes to history.  We are going to learn about sharing our repository with others.  If you have shared your repository then it is almost always a bad idea to change history in that repository.  If you amend a commit, or reset changes that someone else has already based new commits on you will create a mess that will be difficult to resolve.  Git will warn you about commands that may cause difficulty on public commits, but it is up to you to decide.  The rule of thumb is if you have shared the commits don't change them.
 
 ## Are They Really Gone?
 
@@ -235,7 +235,7 @@ Git allows a great deal of flexibility with history.  Both in deciding what even
 	
 	HEAD is now at 1b922e7... It's a mistake
 
-  This sounds more severe than it actually is.  This is Git's way of telling you that you are not at the head of a branch.  Remember that each branch has a tag called head that points to the tip.  Since we moved the head tag of this branch (master) back one commit, this commit is not the head.  There are other commands in Git that will leave you in a detached head state.  This is fine if you are looking at the state of things in your repository.  You can even make changes here, but it will be more challenging to get back to these changes because you are not on a branch.  So if you checkout master, you will not be on this commit, but the one before it.  If you want to continue working with this commit, you can assign a branch to it using the syntax Git shared with you:
+  This is that warning again that we are pointing to a commit that has no tags.  If you want to start working here, then you can create a new branch from here just as Git suggested.
 
 	git checkout -b new_branch_name
 
