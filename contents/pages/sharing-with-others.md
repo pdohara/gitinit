@@ -4,7 +4,7 @@ template: article.jade
 order: 3
 ----
 
-### Distributed Storage
+## Distributed Storage
  
  Git allows for more than a single repository.  There can be a central machine that everyone shares their changes with, or you can setup a machine for each team to work with. Then team lead decides what changes should go to the project repository and be built with all the other teams work.  In this case a team can choose to pull changes from another team repositories (directly, not through the project server).  Perhaps to ensure that a difficult merge is given the time required to get it right.  There are many organizations or repositories that are possible with a DVCS.  This also means that there are new commands used by a DVCS and that it takes some time to become accustom to how this new tool works.
 
@@ -14,7 +14,7 @@ order: 3
 
 Git offers many [options for setting up a server](http://git-scm.com/book/en/Git-on-the-Server-The-Protocols).  As with any server technology these options can be complex and involve decisions relating to security and network performance.  As such, I would recommend using a service like [GitHub](https://github.com/).  This frees you from having to learn about deployment options and server setup.  Alternately you may have a Git server that has already been setup by your employer or someone else on your team.  Obviously in this case you will use that server.  If you are determined to setup your own server, I recommend getting a package like [GitHub for Windows](http://windows.github.com/) or [Bonobo](http://bonobogitserver.com/).  For these examples I will work with a file system based remote.
 
-### Working with Remotes
+## Working with Remotes
 
   After the mess that Micheal made when changing the Directory.txt file with a script, Fred has decided he needs to work on it from Micheal's own machine.  Since the repository is on a network file share Micheal can get his own copy of it by cloning it:
 
@@ -205,8 +205,49 @@ Merging and Rebasing work fine together as long as you don't use both commands o
 ### Who's the Master?
 
   `master` is the name of the trunk or main branch in a repository.  If no other branches are created, then all work will be on the `master` branch.  We'll talk more about branches in the next section.  The names of the branches (master) and (origin/master) represent two different branches in your local repository.  The master branch is the local trunk of your repository.  The origin/master branch is a **tracking branch** of the remote (origin) master branch.  So when you fetch changes from the remote they go on this branch.  Tracking branches are important for working with remotes.  We'll talk about them more in the next section.
-        
-###Where Were We?
+
+### One More Thing, the Stash
+
+  In order to rebase (or merge) the working folder must be clean.  That is to say you cannot have any modified files in the working folder.  If you do Git will tell you to commit or stash them:
+
+  git fetch
+  git rebase
+  Cannot rebase: You have unstaged changes.
+  Please commit or stash them.
+
+  We have already talked about committing changes, but what is the stash?  The stash is an area in the repository you can put changes you are not ready to commit.  This gets them out of your working folder so you can do operations like rebase that require the working folder to be clean.
+
+    git fetch
+    git rebase
+    Cannot rebase: You have unstaged changes.
+    Please commit or stash them.
+    git stash
+    Saved working directory and index state WIP on master: 47262f3 Minor tweeks as I
+     read through it again.
+    HEAD is now at 47262f3 Minor tweeks as I read through it again.
+    git rebase
+    ...
+
+  When you are done you can get the changes back by using `stash pop`.
+
+    git stash pop
+    # On branch master
+    # Changes not staged for commit:
+    #   (use "git add <file>..." to update what will be committed)
+    #   (use "git checkout -- <file>..." to discard changes in working directory)
+    #
+    #       modified:   README.md
+    #
+    # Untracked files:
+    #   (use "git add <file>..." to include in what will be committed)
+    #
+    #       contents/pages/.sharing-with-others.md.swp
+    no changes added to commit (use "git add" and/or "git commit -a")
+    Dropped refs/stash@{0} (155db58dd36675d50233654491909251eb65c6f4)
+
+  Pop both applies the changes to the working folder and removes the stash.
+
+## Where Were We?
         
   Getting back to what we were talking about before, the flow of commands for working with a remote repository is:
         
