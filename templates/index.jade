@@ -4,5 +4,10 @@ block content
   div
     !=contents['pages']['index.md'].html.replace(/\/pages\//g,'./')
 
-
+block prepend header
+  ul.pages
+      each article in articles
+        li
+          a(href=env.helpers.makeRelative(relativeTo, article.url))= article.title
+          section.content
 

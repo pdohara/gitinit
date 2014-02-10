@@ -20,12 +20,16 @@ block content
 block prepend footer
   div.nav
     if (theIndex > 0)
-      a(href=env.helpers.makeRelative(relativeTo, articles[theIndex - 1].url)) &#171; Previous
+      a.previous(href=env.helpers.makeRelative(relativeTo, articles[theIndex - 1].url)) &#171; Previous
+    else
+      a.previous &nbsp;
       
-    a(href=env.helpers.makeRelative(relativeTo, '/')) Index
+    a.index(href=env.helpers.makeRelative(relativeTo, '/')) Home
     
     if (theIndex != articles.length - 1)
-      a(href=env.helpers.makeRelative(relativeTo, articles[theIndex + 1].url)) Next &#187; 
-    b= theArticle
+      a.next(href=env.helpers.makeRelative(relativeTo, articles[theIndex + 1].url)) Next &#187; 
+    else
+      a.next &nbsp;
+    
 
 
