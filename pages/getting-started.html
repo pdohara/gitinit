@@ -12,26 +12,6 @@
   <body class="article-detail">
     <header class="header">
       <div class="content-wrap">
-        <ul class="pages">
-          <li><a href="../pages/before-the-beginning.html">Before the Beginning</a>
-            <section class="content"></section>
-          </li>
-          <li><a href="../pages/getting-started.html">Getting Started</a>
-            <section class="content"></section>
-          </li>
-          <li><a href="../pages/fixing-mistakes.html">Fixing Mistakes</a>
-            <section class="content"></section>
-          </li>
-          <li><a href="../pages/sharing-with-others.html">Sharing With the Team</a>
-            <section class="content"></section>
-          </li>
-          <li><a href="../pages/branching.html">Branching</a>
-            <section class="content"></section>
-          </li>
-          <li><a href="../pages/next-steps.html">Next Steps</a>
-            <section class="content"></section>
-          </li>
-        </ul>
         <h1>Getting Started</h1>
       </div>
     </header>
@@ -92,19 +72,15 @@ git config --global user.email fred.foyle@example.com
 #
 #    MichealF.jpg
 no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
-</code></pre><p>  See that git reminds you that you will need to add the new file.  So let’s do&nbsp;that:</p>
-<pre><code>git add MichealF.jpg
+</code></pre><p>  See that git reminds you that you will need to add the files.  So let’s do&nbsp;that:</p>
+<pre><code>git add Directory.txt
+git add MichealF.jpg
 </code></pre><p>  Now <code>git status</code> shows that the files are both in the&nbsp;index.</p>
 <pre><code># On branch master
 # Changes to be committed:
 #   (use &quot;git reset HEAD &lt;file&gt;...&quot; to unstage)
 #
 #    new file:   MichealF.jpg
-#
-# Changes not staged for commit:
-#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
-#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
-#
 #    modified:   Directory.txt
 #
 </code></pre><p>  Now we just need to commit these&nbsp;changes.</p>
@@ -122,7 +98,7 @@ no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&q
     </div>
     <footer>
       <div class="content-wrap">
-        <div class="nav"><a href="../pages/before-the-beginning.html">&#171; Previous</a><a href="../">Index</a><a href="../pages/fixing-mistakes.html">Next &#187; </a><b></b>
+        <div class="nav"><a href="../pages/before-the-beginning.html" class="previous">&#171; Previous</a><a href="../" class="index">Home</a><a href="../pages/fixing-mistakes.html" class="next">Next &#187; </a>
         </div>
       </div>
     </footer>

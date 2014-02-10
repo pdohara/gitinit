@@ -12,38 +12,18 @@
   <body class="article-detail">
     <header class="header">
       <div class="content-wrap">
-        <ul class="pages">
-          <li><a href="../pages/before-the-beginning.html">Before the Beginning</a>
-            <section class="content"></section>
-          </li>
-          <li><a href="../pages/getting-started.html">Getting Started</a>
-            <section class="content"></section>
-          </li>
-          <li><a href="../pages/fixing-mistakes.html">Fixing Mistakes</a>
-            <section class="content"></section>
-          </li>
-          <li><a href="../pages/sharing-with-others.html">Sharing With the Team</a>
-            <section class="content"></section>
-          </li>
-          <li><a href="../pages/branching.html">Branching</a>
-            <section class="content"></section>
-          </li>
-          <li><a href="../pages/next-steps.html">Next Steps</a>
-            <section class="content"></section>
-          </li>
-        </ul>
         <h1>Sharing With the Team</h1>
       </div>
     </header>
     <div id="content">
       <div class="content-wrap">
         <article class="article">
-          <section class="content"><h3 id="distributed-storage">Distributed&nbsp;Storage</h3>
+          <section class="content"><h2 id="distributed-storage">Distributed&nbsp;Storage</h2>
 <p> Git allows for more than a single repository.  There can be a central machine that everyone shares their changes with, or you can setup a machine for each team to work with. Then team lead decides what changes should go to the project repository and be built with all the other teams work.  In this case a team can choose to pull changes from another team repositories (directly, not through the project server).  Perhaps to ensure that a difficult merge is given the time required to get it right.  There are many organizations or repositories that are possible with a <span class="caps">DVCS</span>.  This also means that there are new commands used by a DVCS and that it takes some time to become accustom to how this new tool&nbsp;works.</p>
 <p>  Before you can share with others, you need to decide where you will be sharing.  Everything that has been done up to this point in the tutorial has happened on a single machine.  The commits that we have been doing have been recorded to the repository on the local machine.  The good part of this is that commits are very fast and we can do them when we do not have access to a “server”.  This means that you can commit changes at your local coffee shop, or on an airplane.  The other side of it is that a commit does not save the information to another machine.  To share the information and therefore back it up we need a remote to work with.  Git needs to be able to accomplish file actions with the&nbsp;remote.</p>
 <h3 id="git-server-options">Git Server&nbsp;Options</h3>
 <p>Git offers many <a href="http://git-scm.com/book/en/Git-on-the-Server-The-Protocols">options for setting up a server</a>.  As with any server technology these options can be complex and involve decisions relating to security and network performance.  As such, I would recommend using a service like <a href="https://github.com/">GitHub</a>.  This frees you from having to learn about deployment options and server setup.  Alternately you may have a Git server that has already been setup by your employer or someone else on your team.  Obviously in this case you will use that server.  If you are determined to setup your own server, I recommend getting a package like <a href="http://windows.github.com/">GitHub for Windows</a> or <a href="http://bonobogitserver.com/">Bonobo</a>.  For these examples I will work with a file system based&nbsp;remote.</p>
-<h3 id="working-with-remotes">Working with&nbsp;Remotes</h3>
+<h2 id="working-with-remotes">Working with&nbsp;Remotes</h2>
 <p>  After the mess that Micheal made when changing the Directory.txt file with a script, Fred has decided he needs to work on it from Micheal’s own machine.  Since the repository is on a network file share Micheal can get his own copy of it by cloning&nbsp;it:</p>
 <pre><code>git clone file://HomeServer/Directory
 </code></pre><p>  Note that the clone command takes a <span class="caps">URL</span>.  This can be http based like for GitHub.  It can be file based as in our example.  It may use ssh if you are using ssh for authentication to the shared repository.  Who ever setup the repository for you should be able to give you the appropriate URL to use to clone the&nbsp;repository.</p>
@@ -90,23 +70,40 @@ From /Users/pdohara/Source/mDir/../Directory
 </code></pre><p>  This command requests any changes from the origin repository.  Though this retrieves any commits that are on the remote server, but not on yours, it does not resolve the two different lines of development nor does it update any of your working files.  Before we can get around to that we need to understand the options for merging these&nbsp;changes.</p>
 <h3 id="distributed-development-reality">Distributed Development&nbsp;Reality</h3>
 <p>  When you are working on the <code>master</code> branch on your local machine, it is likely that other people are pushing changes to the remote repository <code>master</code> branch.  One way to think of this is as if there were two branches.  Development on two different branches needs be merged.  This results in a history graph that looks like&nbsp;this:</p>
-<p><img src="../pages/Merge.png" alt="Merge Example" title="Merge Example"></p>
-<p>  If we actually had multiple branches, that would be fine, but we are working on the same branch.  So we need a new method of getting two different lines of development aligned.  For Git the command is <code>rebase</code>.  This takes the commits you have made to your local <code>master</code> branch and apply them to the remote <code>master</code> branch.  This leads to a linear history like&nbsp;this:</p>
-<p><img src="../pages/Rebase.png" alt="Rebase Example" title="Rebase Example"></p>
-<p>  Before we rebase these changes we want to have a look at them.  So we try our hist&nbsp;alias:</p>
-<pre><code>git hist
-* efa1565 - (HEAD, master) Added Mom (2 hours ago) &lt;Micheal Foyle&gt;
-* 10a326c - Added Cheryl (5 hours ago) &lt;Fred Foyle&gt;
-* dfa5664 - Added Micheal (5 hours ago) &lt;Fred Foyle&gt;
-* 7576855 - Initial commit (20 hours ago) &lt;Fred Foyle&gt;
-</code></pre><p>  So where are the changes we just fetched?  They don’t show up in this history. Git has them in the FETCH_HEAD.  You can see them by pulling the log on&nbsp;that:</p>
-<pre><code>git log FETCH_HEAD --not master
+<ul>
+<li>4ffd7cd - (<span class="caps">HEAD</span>, origin/master, origin/HEAD, master) Working on Sharing&nbsp;page</li>
+<li><p>0c65b8c - Merge remote-tracking branch ‘origin/master’ (6 weeks ago) <Patric
+|\
+| * 675ddb4 - Described the purpose of this site. (6 weeks ago) <Patrick O'Hara>
+| * fa047ea - Initial commit (6 weeks ago) <Patrick O'Hara></p>
+<p>If we actually had multiple branches, that would be fine, but we are working on the same branch.  So we need a new method of getting two different lines of development aligned.  For Git the command is <code>rebase</code>.  This takes the commits you have made to your local <code>master</code> branch and apply them to the remote <code>master</code> branch.  This leads to a linear history like&nbsp;this:</p>
+</li>
+<li><p>c862d02 - (<span class="caps">HEAD</span>, origin/master, origin/HEAD, master) Update current revision&nbsp;f</p>
+</li>
+<li>5b9504a - Fix relative link on index page, adjust title on page. (30 hours&nbsp;ago</li>
+<li>0d27a0c - Switch sub-repo to gh-pages (30 hours ago) <Mackenzie Zastrow></li>
+<li>c35bf69 - Have wintersmith dump generated output to sub-repo. (30 hours ago)&nbsp;&lt;</li>
+<li>b14febb - Add sub-module for generated code (30 hours ago) <Mackenzie Zastrow></li>
+<li>e07f9bf - Rewrote the Index.  Ran the spell checker over all the pages. (31&nbsp;ho</li>
+<li>17f0d91 - Fixing unintended Rebase. (2 days ago) &lt;Patrick&nbsp;O’Hara&gt;</li>
+<li><p>d5f1b34 - Template commit (3 days ago) &lt;Patrick&nbsp;O’Hara&gt;</p>
+<p>Before we rebase these changes we want to have a look at them.  So we try our hist&nbsp;alias:</p>
+<p>git&nbsp;hist</p>
+<ul>
+<li>efa1565 - (<span class="caps">HEAD</span>, master) Added Mom (2 hours ago) <Micheal Foyle></li>
+<li>10a326c - Added Cheryl (5 hours ago) <Fred Foyle></li>
+<li>dfa5664 - Added Micheal (5 hours ago) <Fred Foyle></li>
+<li>7576855 - Initial commit (20 hours ago) <Fred Foyle></li>
+</ul>
+<p>So where are the changes we just fetched?  They don’t show up in this history. Git has them in the FETCH_HEAD.  You can see them by pulling the log on&nbsp;that:</p>
+<p>git log FETCH_HEAD —not master
 commit 68ca42e8c0a23b746c1d67bcca46acc70d6c129f
-Author: Patrick O&#39;Hara &lt;pdohara@smallwarz.org&gt;
-Date:   Sun Feb 2 15:24:00 2014 -0600
-
-    Added Jorge
-</code></pre><p>  Now that we know what we are going to rebase, we can go&nbsp;ahead.  </p>
+Author: Patrick O’Hara <a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#111;&#58;&#112;&#100;&#111;&#104;&#x61;&#x72;&#x61;&#64;&#x73;&#109;&#x61;&#x6c;&#x6c;&#119;&#97;&#x72;&#122;&#46;&#x6f;&#114;&#103;">&#112;&#100;&#111;&#104;&#x61;&#x72;&#x61;&#64;&#x73;&#109;&#x61;&#x6c;&#x6c;&#119;&#97;&#x72;&#122;&#46;&#x6f;&#114;&#103;</a>
+Date:   Sun Feb 2 15:24:00 2014&nbsp;-0600</p>
+<pre><code>Added Jorge
+</code></pre></li>
+</ul>
+<p>  Now that we know what we are going to rebase, we can go&nbsp;ahead.  </p>
 <pre><code>git rebase
 First, rewinding head to replay your work on top of it...
 Applying: Added Mom
@@ -178,7 +175,40 @@ To /Users/pdohara/Source/mDir/../Directory
 </code></pre><p>  This is another case of Git changing history.  Since the commit <span class="caps">SHA1</span> has changed, Git has to assume that it is a different change.As a result someone will get another conflict.  If a few changes are both rebased and merged it can result in quite a&nbsp;mess.</p>
 <h3 id="who-s-the-master-">Who’s the&nbsp;Master?</h3>
 <p>  <code>master</code> is the name of the trunk or main branch in a repository.  If no other branches are created, then all work will be on the <code>master</code> branch.  We’ll talk more about branches in the next section.  The names of the branches (master) and (origin/master) represent two different branches in your local repository.  The master branch is the local trunk of your repository.  The origin/master branch is a <strong>tracking branch</strong> of the remote (origin) master branch.  So when you fetch changes from the remote they go on this branch.  Tracking branches are important for working with remotes.  We’ll talk about them more in the next&nbsp;section.</p>
-<h3 id="where-were-we-">Where Were&nbsp;We?</h3>
+<h3 id="one-more-thing-the-stash">One More Thing, the&nbsp;Stash</h3>
+<p>  In order to rebase (or merge) the working folder must be clean.  That is to say you cannot have any modified files in the working folder.  If you do Git will tell you to commit or stash&nbsp;them:</p>
+<p>  git fetch
+  git rebase
+  Cannot rebase: You have unstaged changes.
+  Please commit or stash&nbsp;them.</p>
+<p>  We have already talked about committing changes, but what is the stash?  The stash is an area in the repository you can put changes you are not ready to commit.  This gets them out of your working folder so you can do operations like rebase that require the working folder to be&nbsp;clean.</p>
+<pre><code>git fetch
+git rebase
+Cannot rebase: You have unstaged changes.
+Please commit or stash them.
+git stash
+Saved working directory and index state WIP on master: 47262f3 Minor tweeks as I
+ read through it again.
+HEAD is now at 47262f3 Minor tweeks as I read through it again.
+git rebase
+...
+</code></pre><p>  When you are done you can get the changes back by using <code>stash pop</code>.</p>
+<pre><code>git stash pop
+# On branch master
+# Changes not staged for commit:
+#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+#
+#       modified:   README.md
+#
+# Untracked files:
+#   (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+#
+#       contents../pages/.sharing-with-others.md.swp
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+Dropped refs/stash@{0} (155db58dd36675d50233654491909251eb65c6f4)
+</code></pre><p>  Pop both applies the changes to the working folder and removes the&nbsp;stash.</p>
+<h2 id="where-were-we-">Where Were&nbsp;We?</h2>
 <p>  Getting back to what we were talking about before, the flow of commands for working with a remote repository&nbsp;is:</p>
 <ul>
 <li><code>git fetch</code></li>
@@ -194,7 +224,7 @@ To /Users/pdohara/Source/mDir/../Directory
     </div>
     <footer>
       <div class="content-wrap">
-        <div class="nav"><a href="../pages/fixing-mistakes.html">&#171; Previous</a><a href="../">Index</a><a href="../pages/branching.html">Next &#187; </a><b></b>
+        <div class="nav"><a href="../pages/fixing-mistakes.html" class="previous">&#171; Previous</a><a href="../" class="index">Home</a><a href="../pages/branching.html" class="next">Next &#187; </a>
         </div>
       </div>
     </footer>

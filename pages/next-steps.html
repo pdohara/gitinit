@@ -12,33 +12,57 @@
   <body class="article-detail">
     <header class="header">
       <div class="content-wrap">
-        <ul class="pages">
-          <li><a href="../pages/before-the-beginning.html">Before the Beginning</a>
-            <section class="content"></section>
-          </li>
-          <li><a href="../pages/getting-started.html">Getting Started</a>
-            <section class="content"></section>
-          </li>
-          <li><a href="../pages/fixing-mistakes.html">Fixing Mistakes</a>
-            <section class="content"></section>
-          </li>
-          <li><a href="../pages/sharing-with-others.html">Sharing With the Team</a>
-            <section class="content"></section>
-          </li>
-          <li><a href="../pages/branching.html">Branching</a>
-            <section class="content"></section>
-          </li>
-          <li><a href="../pages/next-steps.html">Next Steps</a>
-            <section class="content"></section>
-          </li>
-        </ul>
         <h1>Next Steps</h1>
       </div>
     </header>
     <div id="content">
       <div class="content-wrap">
         <article class="article">
-          <section class="content"><h2 id="next-steps">Next&nbsp;Steps</h2>
+          <section class="content"><h2 id="review">Review</h2>
+<p>So let’s look at the commands we’ve learned about for interacting with&nbsp;Git:</p>
+<p>To&nbsp;Start:</p>
+<ul>
+<li><code>git init</code></li>
+</ul>
+<p>Creates a new local&nbsp;repostory</p>
+<ul>
+<li><code>git clone [URL]</code></li>
+</ul>
+<p>Creates a local repository that is based on the repostory specified by the&nbsp;<span class="caps">URL</span>.</p>
+<p>While Working&nbsp;Locally:</p>
+<ul>
+<li><code>git add</code></li>
+<li><code>git commit</code></li>
+</ul>
+<p>Add the files you are ready to commit and then commit them.  Remember to commit smaller chucks of work, then it will be easier to edit the repository to tell the story that you want it to tell&nbsp;later.</p>
+<p>To Share with Other&nbsp;Repositories:</p>
+<ul>
+<li><code>git fetch</code></li>
+</ul>
+<p>Brings the changes from the remote repository to your&nbsp;machine.</p>
+<ul>
+<li><code>git rebase</code></li>
+</ul>
+<p>Works your changes on to the remote machines&nbsp;branch.</p>
+<ul>
+<li><code>git merge</code></li>
+</ul>
+<p>Creates a new commit that has your changes and the changes from the other machine.  Remember to think about the story you want the repository to tell about your changes.  That will help you choose between rebase and&nbsp;merge.</p>
+<ul>
+<li><code>git push</code></li>
+</ul>
+<p>Now send the changes to the other&nbsp;machine.</p>
+<p>Working on&nbsp;Branches:</p>
+<ul>
+<li><code>git branch branch_name</code></li>
+<li><code>git checkout -b branch_name</code></li>
+</ul>
+<p>These create a branch in the local repository.  You may also need to push the branch to the remote&nbsp;repository.</p>
+<ul>
+<li><code>git push origin branch_name</code></li>
+</ul>
+<p>After going through the set of Git command a couple of times you will start to become comfortable with them.  Obviously this is not all that there is to know about Git.  Please consider what you’re next steps with Git may&nbsp;be.</p>
+<h2 id="next-steps">Next&nbsp;Steps</h2>
 <p>  Now that you have an idea how Git works.  What are the next steps?  First you need to use Git.  I recommend spending a little time using the command line tools.  This will help you to become comfortable with the concepts you have learned.  The danger that the various GUIs for Git have is that they often use different terms.  This is fine until you want to ask a question of someone else.  If you are not speaking the same language (using the same words) then you are going to end up frustrated and not get an answer to your question.
   After you spent some time with the command line go ahead and get a <span class="caps">GUI</span> tool is you like.  Also after you have become comfortable with what you’ve learned and you want to know more about Git, or you need a reminder about how a command works, take a look at these&nbsp;resources.</p>
 <h2 id="git-user-manual">Git User&nbsp;Manual</h2>
@@ -55,7 +79,7 @@
     </div>
     <footer>
       <div class="content-wrap">
-        <div class="nav"><a href="../pages/branching.html">&#171; Previous</a><a href="../">Index</a><b></b>
+        <div class="nav"><a href="../pages/branching.html" class="previous">&#171; Previous</a><a href="../" class="index">Home</a><a class="next">&nbsp;</a>
         </div>
       </div>
     </footer>

@@ -12,26 +12,6 @@
   <body class="article-detail">
     <header class="header">
       <div class="content-wrap">
-        <ul class="pages">
-          <li><a href="../pages/before-the-beginning.html">Before the Beginning</a>
-            <section class="content"></section>
-          </li>
-          <li><a href="../pages/getting-started.html">Getting Started</a>
-            <section class="content"></section>
-          </li>
-          <li><a href="../pages/fixing-mistakes.html">Fixing Mistakes</a>
-            <section class="content"></section>
-          </li>
-          <li><a href="../pages/sharing-with-others.html">Sharing With the Team</a>
-            <section class="content"></section>
-          </li>
-          <li><a href="../pages/branching.html">Branching</a>
-            <section class="content"></section>
-          </li>
-          <li><a href="../pages/next-steps.html">Next Steps</a>
-            <section class="content"></section>
-          </li>
-        </ul>
         <h1>Before the Beginning</h1>
       </div>
     </header>
@@ -46,7 +26,7 @@
 <h3 id="repository">Repository</h3>
 <p>  All version control systems store their data somewhere.  For Git this is called the repository.  The repository is in a folder called <code>.git</code> in the root folder that holds your files.  This repository is not some sort of client data store like in <span class="caps">SVN</span>, but contains all the version data.  All of the commits (changes) of the files are stored&nbsp;here.</p>
 <h3 id="commit">Commit</h3>
-<p>  A commit is a set of changes to files.  Note that it may be a change to a single file, but more typically a commit will track changes to several files.  This is convenient because changes often involve changes to multiple files.  The Commit is sometimes called a changeset.  Since Git stores these locally it is very quick to commit.  We will talk more about this idea and how you should think about committing&nbsp;changes.</p>
+<p>  A commit is a set of changes to files.  Note that it may be a change to a single file, but more typically a commit will track changes to several files.  This is convenient because changes often involve multiple files.  The Commit is sometimes called a changeset.  Since Git stores these locally it is very quick to commit.  We will talk more about this idea and how you should think about committing&nbsp;changes.</p>
 <h4 id="sha1-the-name-of-a-commit"><span class="caps">SHA1</span> The name of a&nbsp;Commit</h4>
 <p>  Commits in Git are “named” by a <span class="caps">SHA1</span> hash.  A hash is a mathematical algorithm that produces a fixed output, generally unique number based on an input.  Essentially, Git reads the changes made in the commit and generates a 20 byte number from it.  Sometimes this is referred to as a digest or message digest.  What is important about the SHA1 hash is that it is essentially always unique no matter what machine it is generated on.  This means that two machines will almost never create the same SHA1 number.  This is important for a distributed&nbsp;system.</p>
 <h3 id="tags">Tags</h3>
@@ -59,7 +39,7 @@
     </div>
     <footer>
       <div class="content-wrap">
-        <div class="nav"><a href="../">Index</a><a href="../pages/getting-started.html">Next &#187; </a><b></b>
+        <div class="nav"><a class="previous">&nbsp;</a><a href="../" class="index">Home</a><a href="../pages/getting-started.html" class="next">Next &#187; </a>
         </div>
       </div>
     </footer>
