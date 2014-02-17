@@ -3,6 +3,7 @@ block vars
   - var bodyclass = null;
   - var relativeTo = page != null ? page.url : '/'
   - var articles = env.helpers.getArticles(contents)
+  - var theIndex = articles.indexOf(page)
 html(lang='en')
   head
     block head
@@ -17,7 +18,13 @@ html(lang='en')
   body(class=bodyclass)
     header.header
       div.content-wrap
-
+        ul.pages
+          each article, index in articles
+            li(class=index==theIndex ? 'selected' : '')
+              a(href=env.helpers.makeRelative(relativeTo, article.url))
+                span.number= index+1
+                span.name-container
+                  span.name= article.title
         block header
           div.logo
             h1
