@@ -66,6 +66,8 @@ ol, ul {
 
 li {
   margin-bottom: 0.5em;
+  /* padding: 0; */
+  margin: 0;
 }
 
 blockquote {
@@ -84,7 +86,7 @@ hr {
 /* page header */
 
 .header {
-  margin: 3em 0 5em;
+  margin: 0em 0 5em;
 }
 
 .header h1 {
@@ -99,16 +101,6 @@ hr {
   color: #171717;
 }
 
-.header .author {
-  font-family: 'Merriweather', serif;
-  font-variant: small-caps;
-  text-transform: lowercase;
-  text-rendering: auto;
-  text-align: center;
-  font-weight: 400;
-  letter-spacing: 1px;
-}
-
 .header .description {
   font-size: 1.2em;
   font-style: italic;
@@ -117,14 +109,75 @@ hr {
 }
 
 .pages {
-  margin-left: 5px;
+  font-size: 0px;
+  display: inline-block;
+  padding-left: 30px;
 }
+
+.pages li {
+  display: inline-block;
+  font-size: 18px;
+  width: 100px;
+  height: 120px;
+  background-color: rgba(0,0,0, .75);
+  position: relative;
+  border: 1px solid black;
+}
+
+.pages li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: white !important;
+}
+
+.pages li:hover {
+  opacity: .7;
+}
+
+.pages li.selected {
+  opacity: .8;
+}
+
+.pages li a > span {
+  display: block;
+  position: absolute;
+  text-align: center;
+}
+
+.pages li a .number {
+  top: .1em;
+  left: 50%;
+  margin-left: -.7em;
+  width: 1.4em;
+  height: 1.4em;
+  background-color: #666;
+  border-radius: 2em;
+}
+
+.pages li a .name-container {
+  font-size: .8em;
+  top: 2.1em;
+  vertical-align: middle;
+  height: 80px;
+  width: 100px;
+  display: table-cell;
+  position: relative;
+}
+
+.pages li a .name {
+  text-align: center;
+  display: inline-block;
+  width: 80px;
+}
+
 
 body.article-detail > header h1 {
   font-size: 2.5em;
   font-style: italic;
   font-weight: 400;
   margin-bottom: -0.2em;
+  margin-top: 1em;
 }
 
 body.article-detail > header {
