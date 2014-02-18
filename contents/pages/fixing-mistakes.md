@@ -29,7 +29,6 @@ order: 2
 	* 7576855 Initial commit
 
   This is very concise, but we have lost much of the information.  We can customise it further though:
-TODO-Mac How do I specify colors here?
 
 	git log --graph --pretty=format:'%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short
 	* f6d26b1 - (HEAD, master) Added Micheal (14 hours ago) <Fred Foyle>
