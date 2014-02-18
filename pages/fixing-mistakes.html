@@ -45,8 +45,7 @@ Date:   Sat Feb 1 20:23:13 2014 -0600
 <pre><code>git log --decorate --graph --oneline --date-order
 * f6d26b1 (HEAD, master) Added Micheal
 * 7576855 Initial commit
-</code></pre><p>  This is very concise, but we have lost much of the information.  We can customise it further though:
-<span class="caps">TODO</span>-Mac How do I specify colors&nbsp;here?</p>
+</code></pre><p>  This is very concise, but we have lost much of the information.  We can customise it further though:</p>
 <pre><code>git log --graph --pretty=format:&#39;%C(yellow)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit --date=short
 * f6d26b1 - (HEAD, master) Added Micheal (14 hours ago) &lt;Fred Foyle&gt;
 * 7576855 - Initial commit (14 hours ago) &lt;Fred Foyle&gt;
