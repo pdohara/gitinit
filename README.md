@@ -1,6 +1,8 @@
 Git'in It
 =========
 
+[View it here](http://pdohara.github.io/gitinit/)
+
 A Git Tutorial inspired by Hg Init
 ----------------------------------
 
@@ -9,4 +11,3 @@ I first began to understand distributed version control by reading Joel Spolski'
 Thanks
 
 Pat O
-
